@@ -1,6 +1,6 @@
 package com.accenture.applicationlocationvehicule.service.dto;
 
-public record UtilityVehicleRequestDto(
+public record UtilityVehicleResponseDto(
      int id,
      int baseRate,
      String brand,
