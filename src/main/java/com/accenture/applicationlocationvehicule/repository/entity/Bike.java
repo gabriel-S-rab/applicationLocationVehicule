@@ -12,7 +12,7 @@ public class Bike {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private int framSize;
     private String brand;
     private String color;
@@ -26,7 +26,7 @@ public class Bike {
     private String requiredLicense;
     private int dailyBaseRate;
 
-    public Bike(Long id, int framSize, String brand, String color, boolean removedFromThePark, boolean active, int mileage, int weight, boolean electric, boolean discBrake, String type, String requiredLicense, int dailyBaseRate) {
+    public Bike(int id, int framSize, String brand, String color, boolean removedFromThePark, boolean active, int mileage, int weight, boolean electric, boolean discBrake, String type, String requiredLicense, int dailyBaseRate) {
         this.id = id;
         this.framSize = framSize;
         this.brand = brand;
@@ -42,11 +42,11 @@ public class Bike {
         this.dailyBaseRate = dailyBaseRate;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

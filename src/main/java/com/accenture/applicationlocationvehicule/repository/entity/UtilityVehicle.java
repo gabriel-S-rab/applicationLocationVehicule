@@ -12,7 +12,7 @@ public class UtilityVehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private int baseRate;
     private String brand;
     private String model;
@@ -30,7 +30,7 @@ public class UtilityVehicle {
     private boolean removedFromFleet;
     private boolean active;
 
-    public UtilityVehicle(Long id, int baseRate, String brand, String model, String color, String numberOfSeats, String fuelType, String transmission, boolean airConditionning, int maximumLoad, int weight, int capacity, String type, String license, int mileage, boolean removedFromFleet, boolean active) {
+    public UtilityVehicle(int id, int baseRate, String brand, String model, String color, String numberOfSeats, String fuelType, String transmission, boolean airConditionning, int maximumLoad, int weight, int capacity, String type, String license, int mileage, boolean removedFromFleet, boolean active) {
         this.id = id;
         this.baseRate = baseRate;
         this.brand = brand;
@@ -50,11 +50,11 @@ public class UtilityVehicle {
         this.active = active;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

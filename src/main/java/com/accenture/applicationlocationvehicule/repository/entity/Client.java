@@ -3,14 +3,13 @@ package com.accenture.applicationlocationvehicule.repository.entity;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String DateOfBirth;
     private String desactivated;
     private List<String> listOfPermis;
@@ -24,7 +23,7 @@ public class Client {
     private String firstName;
     private String lastName;
 
-    public Client(Long id, String dateOfBirth, String desactivated, List<String> listOfPermis, String registrationDate, String password, String email, Adress adress, String firstName, String lastName) {
+    public Client(int id, String dateOfBirth, String desactivated, List<String> listOfPermis, String registrationDate, String password, String email, Adress adress, String firstName, String lastName) {
         this.id = id;
         DateOfBirth = dateOfBirth;
         this.desactivated = desactivated;
@@ -37,11 +36,11 @@ public class Client {
         this.lastName = lastName;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

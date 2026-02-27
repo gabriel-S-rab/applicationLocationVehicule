@@ -12,14 +12,14 @@ public class Adminstrator {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String lastName;
     private String firstName;
     private String function;
     private String email;
     private String password;
 
-    public Adminstrator(Long id, String lastName, String firstName, String function, String email, String password) {
+    public Adminstrator(int id, String lastName, String firstName, String function, String email, String password) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -28,11 +28,11 @@ public class Adminstrator {
         this.password = password;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

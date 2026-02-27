@@ -2,14 +2,12 @@ package com.accenture.applicationlocationvehicule.repository.entity;
 
 import jakarta.persistence.*;
 
-import java.util.UUID;
-
 @Entity
 public class Rental {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private int NumberOfKilometersTraveled;
     private int TotalAmount;
     private String validationDate;
@@ -26,7 +24,7 @@ public class Rental {
     private String startDate;
     private String endDate;
 
-    public Rental(Long id, int numberOfKilometersTraveled, int totalAmount, String validationDate, String rentalStatus, Client client /*, Vehicle vehicule  , Accessory accessory */, String startDate, String endDate) {
+    public Rental(int id, int numberOfKilometersTraveled, int totalAmount, String validationDate, String rentalStatus, Client client /*, Vehicle vehicule  , Accessory accessory */, String startDate, String endDate) {
         this.id = id;
         NumberOfKilometersTraveled = numberOfKilometersTraveled;
         TotalAmount = totalAmount;
@@ -39,11 +37,11 @@ public class Rental {
         this.endDate = endDate;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

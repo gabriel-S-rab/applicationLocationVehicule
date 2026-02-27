@@ -12,7 +12,7 @@ public class MotorHome {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private boolean airConditionning;
     private boolean refrigeratorEquipement;
     private String brand;
@@ -31,7 +31,7 @@ public class MotorHome {
     private boolean kitchenEquipement;
     private int mileage;
 
-    public MotorHome(Long id, boolean airConditionning, boolean refrigeratorEquipement, String brand, String model, String color, int numberOfSeats, String fuelType, String transmission, int weight, String requiredLicense, String type, boolean showerEquipement, boolean bedlinen, int height, int numberOfBed, boolean kitchenEquipement, int mileage) {
+    public MotorHome(int id, boolean airConditionning, boolean refrigeratorEquipement, String brand, String model, String color, int numberOfSeats, String fuelType, String transmission, int weight, String requiredLicense, String type, boolean showerEquipement, boolean bedlinen, int height, int numberOfBed, boolean kitchenEquipement, int mileage) {
         super();
         this.id = id;
         this.airConditionning = airConditionning;
@@ -53,11 +53,11 @@ public class MotorHome {
         this.mileage = mileage;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
