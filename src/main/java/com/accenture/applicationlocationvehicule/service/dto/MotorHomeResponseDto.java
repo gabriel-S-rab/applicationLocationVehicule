@@ -1,17 +1,7 @@
-package com.accenture.applicationlocationvehicule.repository.entity;
+package com.accenture.applicationlocationvehicule.service.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+public class MotorHomeResponseDto {
 
-import java.util.UUID;
-
-@Entity
-public class MotorHome extends Vehicle{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private boolean airConditionning;
     private boolean refrigeratorEquipement;
@@ -31,8 +21,7 @@ public class MotorHome extends Vehicle{
     private boolean kitchenEquipement;
     private int mileage;
 
-    public MotorHome(int id, boolean airConditionning, boolean refrigeratorEquipement, String brand, String model, String color, int numberOfSeats, String fuelType, String transmission, int weight, String requiredLicense, String type, boolean showerEquipement, boolean bedlinen, int height, int numberOfBed, boolean kitchenEquipement, int mileage) {
-        super();
+    public MotorHomeResponseDto(int id, boolean airConditionning, boolean refrigeratorEquipement, String brand, String model, String color, int numberOfSeats, String fuelType, String transmission, int weight, String requiredLicense, String type, boolean bedlinen, boolean showerEquipement, int height, int numberOfBed, boolean kitchenEquipement, int mileage) {
         this.id = id;
         this.airConditionning = airConditionning;
         this.refrigeratorEquipement = refrigeratorEquipement;
@@ -45,8 +34,8 @@ public class MotorHome extends Vehicle{
         this.weight = weight;
         this.requiredLicense = requiredLicense;
         this.type = type;
-        this.showerEquipement = showerEquipement;
         this.bedlinen = bedlinen;
+        this.showerEquipement = showerEquipement;
         this.height = height;
         this.numberOfBed = numberOfBed;
         this.kitchenEquipement = kitchenEquipement;
@@ -85,6 +74,14 @@ public class MotorHome extends Vehicle{
         this.brand = brand;
     }
 
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
     public String getColor() {
         return color;
     }
@@ -99,14 +96,6 @@ public class MotorHome extends Vehicle{
 
     public void setNumberOfSeats(int numberOfSeats) {
         this.numberOfSeats = numberOfSeats;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
     }
 
     public String getFuelType() {

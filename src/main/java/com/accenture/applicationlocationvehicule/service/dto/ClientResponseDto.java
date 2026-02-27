@@ -1,15 +1,15 @@
-package com.accenture.applicationlocationvehicule.repository.entity;
+package com.accenture.applicationlocationvehicule.service.dto;
 
-import jakarta.persistence.*;
+import com.accenture.applicationlocationvehicule.repository.entity.Adress;
+import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToOne;
 
 import java.util.List;
-import java.util.UUID;
 
-@Entity
-public class Client {
+public class ClientResponseDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String DateOfBirth;
     private String desactivated;
@@ -17,14 +17,11 @@ public class Client {
     private String RegistrationDate;
     private String password;
     private String email;
-    @OneToOne(cascade = CascadeType.ALL)
-    @Basic(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "adress_id")
     private Adress adress;
     private String firstName;
     private String lastName;
 
-    public Client(int id, String dateOfBirth, String desactivated, List<String> listOfPermis, String registrationDate, String password, String email, Adress adress, String firstName, String lastName) {
+    public ClientResponseDto(int id, String dateOfBirth, String desactivated, List<String> listOfPermis, String registrationDate, String password, String email, Adress adress, String firstName, String lastName) {
         this.id = id;
         DateOfBirth = dateOfBirth;
         this.desactivated = desactivated;

@@ -1,5 +1,6 @@
 package com.accenture.applicationlocationvehicule;
 
+import com.accenture.applicationlocationvehicule.repository.entity.Rental;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

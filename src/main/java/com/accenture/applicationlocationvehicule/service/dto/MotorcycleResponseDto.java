@@ -1,17 +1,7 @@
-package com.accenture.applicationlocationvehicule.repository.entity;
+package com.accenture.applicationlocationvehicule.service.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+public class MotorcycleResponseDto {
 
-import java.util.UUID;
-
-@Entity
-public class Motorcycle extends Vehicle {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int powerInKw;
     private String Transmission;
@@ -29,12 +19,11 @@ public class Motorcycle extends Vehicle {
     private String type;
     private int displacement;
 
-
-    public Motorcycle(int id, int powerInKw, String requiredLicense, String transmission, String brand, String model, String color, int numberOfCylinder, int seatHeight, int weight, boolean removedFromFleet, boolean active, int dailyBaseRate, int mileage, String type, int displacement) {
+    public MotorcycleResponseDto(int id, int powerInKw, String transmission, String requiredLicense, String brand, String model, String color, int numberOfCylinder, int seatHeight, int weight, boolean removedFromFleet, boolean active, int dailyBaseRate, int mileage, String type, int displacement) {
         this.id = id;
         this.powerInKw = powerInKw;
-        this.requiredLicense = requiredLicense;
         Transmission = transmission;
+        this.requiredLicense = requiredLicense;
         this.brand = brand;
         this.model = model;
         this.color = color;

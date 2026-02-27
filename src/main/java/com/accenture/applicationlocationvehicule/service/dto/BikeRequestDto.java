@@ -1,17 +1,7 @@
-package com.accenture.applicationlocationvehicule.repository.entity;
+package com.accenture.applicationlocationvehicule.service.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+public class BikeRequestDto {
 
-import java.util.UUID;
-
-@Entity
-public class Bike extends  Vehicle{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int framSize;
     private String brand;
@@ -26,7 +16,7 @@ public class Bike extends  Vehicle{
     private String requiredLicense;
     private int dailyBaseRate;
 
-    public Bike(int id, int framSize, String brand, String color, boolean removedFromThePark, boolean active, int mileage, int weight, boolean electric, boolean discBrake, String type, String requiredLicense, int dailyBaseRate) {
+    public BikeRequestDto(int id, int framSize, String brand, String color, boolean removedFromThePark, boolean active, int mileage, int weight, boolean electric, boolean discBrake, String type, String requiredLicense, int dailyBaseRate) {
         this.id = id;
         this.framSize = framSize;
         this.brand = brand;

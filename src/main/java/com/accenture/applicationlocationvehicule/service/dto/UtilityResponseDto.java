@@ -1,17 +1,7 @@
-package com.accenture.applicationlocationvehicule.repository.entity;
+package com.accenture.applicationlocationvehicule.service.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+public class UtilityResponseDto {
 
-import java.util.UUID;
-
-@Entity
-public class UtilityVehicle extends Vehicle{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int baseRate;
     private String brand;
@@ -30,7 +20,7 @@ public class UtilityVehicle extends Vehicle{
     private boolean removedFromFleet;
     private boolean active;
 
-    public UtilityVehicle(int id, int baseRate, String brand, String model, String color, String numberOfSeats, String fuelType, String transmission, boolean airConditionning, int maximumLoad, int weight, int capacity, String type, String license, int mileage, boolean removedFromFleet, boolean active) {
+    public UtilityResponseDto(int id, int baseRate, String brand, String model, String color, String numberOfSeats, String fuelType, String transmission, boolean airConditionning, int maximumLoad, int weight, int capacity, String type, String license, int mileage, boolean removedFromFleet, boolean active) {
         this.id = id;
         this.baseRate = baseRate;
         this.brand = brand;

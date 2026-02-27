@@ -1,33 +1,22 @@
-package com.accenture.applicationlocationvehicule.repository.entity;
+package com.accenture.applicationlocationvehicule.service.dto;
 
-import jakarta.persistence.*;
-import org.springframework.objenesis.instantiator.util.UnsafeUtils;
+import com.accenture.applicationlocationvehicule.repository.entity.Client;
+import com.accenture.applicationlocationvehicule.repository.entity.Vehicle;
 
-import java.util.UUID;
+public class RentalRequestDto {
 
-@Entity
-public class Rental {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int NumberOfKilometersTraveled;
     private int TotalAmount;
     private String validationDate;
     private String rentalStatus;
-    @OneToOne
-    @JoinColumn(name = "client_id")
     private Client client;
-    @OneToOne
-    @JoinColumn(name = "vehicule_id")
     private Vehicle vehicule;
-//    @ManyToOne
-//    @JoinColumn(name = "accessory_id")
 //  private Accessory accessory;
     private String startDate;
     private String endDate;
 
-    public Rental(int id, int numberOfKilometersTraveled, int totalAmount, String validationDate, String rentalStatus, Client client , Vehicle vehicule /* , Accessory accessory */, String startDate, String endDate) {
+    public RentalRequestDto(int id, int numberOfKilometersTraveled, int totalAmount, String validationDate, String rentalStatus, Client client, Vehicle vehicule, String startDate, String endDate) {
         this.id = id;
         NumberOfKilometersTraveled = numberOfKilometersTraveled;
         TotalAmount = totalAmount;
@@ -35,7 +24,6 @@ public class Rental {
         this.rentalStatus = rentalStatus;
         this.client = client;
         this.vehicule = vehicule;
-    //    this.accessory = accessory;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -88,21 +76,13 @@ public class Rental {
         this.client = client;
     }
 
-//    public Vehicle getVehicule() {
-//        return vehicule;
-//    }
-//
-//    public void setVehicule(Vehicle vehicule) {
-//        this.vehicule = vehicule;
-//    }
+    public Vehicle getVehicule() {
+        return vehicule;
+    }
 
-//    public Accessory getAccessory() {
-//        return accessory;
-//    }
-//
-//    public void setAccessory(Accessory accessory) {
-//        this.accessory = accessory;
-//    }
+    public void setVehicule(Vehicle vehicule) {
+        this.vehicule = vehicule;
+    }
 
     public String getStartDate() {
         return startDate;
