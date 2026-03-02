@@ -11,8 +11,8 @@ public class Rental {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int NumberOfKilometersTraveled;
-    private int TotalAmount;
+    private int numberOfKilometersTraveled;
+    private int totalAmount;
     private String validationDate;
     private String rentalStatus;
     @OneToOne
@@ -29,8 +29,8 @@ public class Rental {
 
     public Rental(int id, int numberOfKilometersTraveled, int totalAmount, String validationDate, String rentalStatus, Client client , Vehicle vehicule /* , Accessory accessory */, String startDate, String endDate) {
         this.id = id;
-        NumberOfKilometersTraveled = numberOfKilometersTraveled;
-        TotalAmount = totalAmount;
+        this.numberOfKilometersTraveled = numberOfKilometersTraveled;
+        this.totalAmount = totalAmount;
         this.validationDate = validationDate;
         this.rentalStatus = rentalStatus;
         this.client = client;
@@ -49,19 +49,19 @@ public class Rental {
     }
 
     public int getNumberOfKilometersTraveled() {
-        return NumberOfKilometersTraveled;
+        return numberOfKilometersTraveled;
     }
 
     public void setNumberOfKilometersTraveled(int numberOfKilometersTraveled) {
-        NumberOfKilometersTraveled = numberOfKilometersTraveled;
+        numberOfKilometersTraveled = numberOfKilometersTraveled;
     }
 
     public int getTotalAmount() {
-        return TotalAmount;
+        return totalAmount;
     }
 
     public void setTotalAmount(int totalAmount) {
-        TotalAmount = totalAmount;
+        totalAmount = totalAmount;
     }
 
     public String getValidationDate() {

@@ -3,7 +3,7 @@ package com.accenture.applicationlocationvehicule.service.dto;
 public record MotorcycleRequestDto(
      int id,
      int powerInKw,
-     String Transmission,
+     String transmission,
      String requiredLicense,
      String brand,
      String model,

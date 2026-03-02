@@ -11,8 +11,8 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int NumberOfDoors;
-    private int DailyBaseRentalRate;
+    private int numberOfDoors;
+    private int dailyBaseRentalRate;
     private String model;
     private String brand;
     private boolean removedFromTheFleet;
@@ -23,13 +23,13 @@ public class Car {
     private boolean airConditionning;
     private int numberOfLuggage;
     private String type;
-    private String licenserequired;
+    private String licenseRequired;
     private int mileage;
 
     public Car(int id, int numberOfDoors, int dailyBaseRentalRate, String model, String brand, boolean removedFromTheFleet, boolean active, String color, int numberOfSeat, String typeOfFuel, boolean airConditionning, int numberOfLuggage, String type, String licenserequired, int mileage) {
         this.id = id;
-        NumberOfDoors = numberOfDoors;
-        DailyBaseRentalRate = dailyBaseRentalRate;
+        this.numberOfDoors = numberOfDoors;
+        this.dailyBaseRentalRate = dailyBaseRentalRate;
         this.model = model;
         this.brand = brand;
         this.removedFromTheFleet = removedFromTheFleet;
@@ -40,7 +40,7 @@ public class Car {
         this.airConditionning = airConditionning;
         this.numberOfLuggage = numberOfLuggage;
         this.type = type;
-        this.licenserequired = licenserequired;
+        this.licenseRequired = licenserequired;
         this.mileage = mileage;
     }
 
@@ -53,19 +53,19 @@ public class Car {
     }
 
     public int getNumberOfDoors() {
-        return NumberOfDoors;
+        return numberOfDoors;
     }
 
     public void setNumberOfDoors(int numberOfDoors) {
-        NumberOfDoors = numberOfDoors;
+        numberOfDoors = numberOfDoors;
     }
 
     public int getDailyBaseRentalRate() {
-        return DailyBaseRentalRate;
+        return dailyBaseRentalRate;
     }
 
     public void setDailyBaseRentalRate(int dailyBaseRentalRate) {
-        DailyBaseRentalRate = dailyBaseRentalRate;
+        dailyBaseRentalRate = dailyBaseRentalRate;
     }
 
     public String getModel() {
@@ -149,11 +149,11 @@ public class Car {
     }
 
     public String getLicenserequired() {
-        return licenserequired;
+        return licenseRequired;
     }
 
     public void setLicenserequired(String licenserequired) {
-        this.licenserequired = licenserequired;
+        this.licenseRequired = licenserequired;
     }
 
     public int getMileage() {

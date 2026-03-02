@@ -8,7 +8,7 @@ public record UtilityVehicleRequestDto(
      String color,
      String numberOfSeats,
      String fuelType,
-     String Transmission,
+     String transmission,
      boolean airConditionning,
      int maximumLoad,
      int weight,

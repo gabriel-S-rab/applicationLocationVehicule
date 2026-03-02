@@ -11,10 +11,10 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String DateOfBirth;
+    private String dateOfBirth;
     private String desactivated;
     private List<String> listOfPermis;
-    private String RegistrationDate;
+    private String registrationDate;
     private String password;
     private String email;
     @OneToOne(cascade = CascadeType.ALL)
@@ -26,10 +26,10 @@ public class Client {
 
     public Client(int id, String dateOfBirth, String desactivated, List<String> listOfPermis, String registrationDate, String password, String email, Adress adress, String firstName, String lastName) {
         this.id = id;
-        DateOfBirth = dateOfBirth;
+        this.dateOfBirth = dateOfBirth;
         this.desactivated = desactivated;
         this.listOfPermis = listOfPermis;
-        RegistrationDate = registrationDate;
+        this.registrationDate = registrationDate;
         this.password = password;
         this.email = email;
         this.adress = adress;
@@ -46,11 +46,11 @@ public class Client {
     }
 
     public String getDateOfBirth() {
-        return DateOfBirth;
+        return dateOfBirth;
     }
 
     public void setDateOfBirth(String dateOfBirth) {
-        DateOfBirth = dateOfBirth;
+        dateOfBirth = dateOfBirth;
     }
 
     public String getDesactivated() {
@@ -70,11 +70,11 @@ public class Client {
     }
 
     public String getRegistrationDate() {
-        return RegistrationDate;
+        return registrationDate;
     }
 
     public void setRegistrationDate(String registrationDate) {
-        RegistrationDate = registrationDate;
+        registrationDate = registrationDate;
     }
 
     public String getPassword() {

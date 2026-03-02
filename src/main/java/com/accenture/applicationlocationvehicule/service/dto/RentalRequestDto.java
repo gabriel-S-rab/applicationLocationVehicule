@@ -5,8 +5,8 @@ import com.accenture.applicationlocationvehicule.repository.entity.Vehicle;
 
 public record RentalRequestDto(
      int id,
-     int NumberOfKilometersTraveled,
-     int TotalAmount,
+     int numberOfKilometersTraveled,
+     int totalAmount,
      String validationDate,
      String rentalStatus,
      Client client,

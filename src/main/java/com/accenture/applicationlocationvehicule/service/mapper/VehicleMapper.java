@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface VehicleMapper {
 
-    @Mapping()
+    @Mapping(source = "id" , target = "Vehicle.id")
+    @Mapping(source = "vehicle" , target = "Vehicle")
     Vehicle toVehicle(VehicleRequestDto vehicleRequestDto);
 }

@@ -14,7 +14,7 @@ public class Motorcycle extends Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int powerInKw;
-    private String Transmission;
+    private String transmission;
     private String requiredLicense;
     private String brand;
     private String model;
@@ -34,7 +34,7 @@ public class Motorcycle extends Vehicle {
         this.id = id;
         this.powerInKw = powerInKw;
         this.requiredLicense = requiredLicense;
-        Transmission = transmission;
+        this.transmission = transmission;
         this.brand = brand;
         this.model = model;
         this.color = color;
@@ -66,11 +66,11 @@ public class Motorcycle extends Vehicle {
     }
 
     public String getTransmission() {
-        return Transmission;
+        return transmission;
     }
 
     public void setTransmission(String transmission) {
-        Transmission = transmission;
+        transmission = transmission;
     }
 
     public String getRequiredLicense() {

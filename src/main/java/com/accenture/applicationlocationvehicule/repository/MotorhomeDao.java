@@ -1,7 +1,7 @@
 package com.accenture.applicationlocationvehicule.repository;
 
-import com.accenture.applicationlocationvehicule.repository.entity.MotorHome;
+import com.accenture.applicationlocationvehicule.repository.entity.Motorhome;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MotorhomeDao extends JpaRepository<MotorHome , Integer> {
+public interface MotorhomeDao extends JpaRepository<Motorhome, Integer> {
 }

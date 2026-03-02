@@ -10,10 +10,10 @@ import java.util.List;
 
 public record ClientRequestDto(
      int id,
-     String DateOfBirth,
+     String dateOfBirth,
      String desactivated,
      List<String> listOfPermis,
-     String RegistrationDate,
+     String registrationDate,
      String password,
      String email,
      Adress adress,

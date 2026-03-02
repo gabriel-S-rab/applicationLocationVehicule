@@ -5,10 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import java.util.UUID;
-
 @Entity
-public class MotorHome extends Vehicle{
+public class Motorhome extends Vehicle{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +29,7 @@ public class MotorHome extends Vehicle{
     private boolean kitchenEquipement;
     private int mileage;
 
-    public MotorHome(int id, boolean airConditionning, boolean refrigeratorEquipement, String brand, String model, String color, int numberOfSeats, String fuelType, String transmission, int weight, String requiredLicense, String type, boolean showerEquipement, boolean bedlinen, int height, int numberOfBed, boolean kitchenEquipement, int mileage) {
+    public Motorhome(int id, boolean airConditionning, boolean refrigeratorEquipement, String brand, String model, String color, int numberOfSeats, String fuelType, String transmission, int weight, String requiredLicense, String type, boolean showerEquipement, boolean bedlinen, int height, int numberOfBed, boolean kitchenEquipement, int mileage) {
         super();
         this.id = id;
         this.airConditionning = airConditionning;

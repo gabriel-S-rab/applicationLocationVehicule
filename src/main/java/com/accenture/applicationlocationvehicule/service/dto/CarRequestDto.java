@@ -2,8 +2,8 @@ package com.accenture.applicationlocationvehicule.service.dto;
 
 public record CarRequestDto(
      int id,
-     int NumberOfDoors,
-     int DailyBaseRentalRate,
+     int numberOfDoors,
+     int dailyBaseRentalRate,
      String model,
      String brand,
      boolean removedFromTheFleet,
@@ -14,7 +14,7 @@ public record CarRequestDto(
      boolean airConditionning,
      int numberOfLuggage,
      String type,
-     String licenserequired,
+     String licenseRequired,
      int mileage
 )
 {}

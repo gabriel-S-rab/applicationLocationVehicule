@@ -19,7 +19,7 @@ public class UtilityVehicle extends Vehicle{
     private String color;
     private String numberOfSeats;
     private String fuelType;
-    private String Transmission;
+    private String transmission;
     private boolean airConditionning;
     private int maximumLoad;
     private int weight;
@@ -38,7 +38,7 @@ public class UtilityVehicle extends Vehicle{
         this.color = color;
         this.numberOfSeats = numberOfSeats;
         this.fuelType = fuelType;
-        Transmission = transmission;
+        this.transmission = transmission;
         this.airConditionning = airConditionning;
         this.maximumLoad = maximumLoad;
         this.weight = weight;
@@ -107,11 +107,11 @@ public class UtilityVehicle extends Vehicle{
     }
 
     public String getTransmission() {
-        return Transmission;
+        return transmission;
     }
 
     public void setTransmission(String transmission) {
-        Transmission = transmission;
+        transmission = transmission;
     }
 
     public boolean isAirConditionning() {
