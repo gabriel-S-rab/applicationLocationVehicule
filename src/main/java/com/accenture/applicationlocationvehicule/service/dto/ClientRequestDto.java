@@ -9,7 +9,6 @@ import jakarta.persistence.OneToOne;
 import java.util.List;
 
 public record ClientRequestDto(
-     Long id,
      String dateOfBirth,
      String desactivated,
      List<String> listOfPermis,

@@ -13,6 +13,7 @@ public class Client {
     private Long id;
     private String dateOfBirth;
     private String desactivated;
+    @ElementCollection
     private List<String> listOfPermis;
     private String registrationDate;
     private String password;
@@ -22,6 +23,9 @@ public class Client {
     private Adress adress;
     private String firstName;
     private String lastName;
+
+    public Client() {
+    }
 
     public Client(String dateOfBirth, String desactivated, List<String> listOfPermis, String registrationDate, String password, String email, Adress adress, String firstName, String lastName) {
         this.dateOfBirth = dateOfBirth;
@@ -35,18 +39,18 @@ public class Client {
         this.lastName = lastName;
     } // asupprimer ultérieurement
 
-    public Client(long id, String dateOfBirth, String desactivated, List<String> listOfPermis, String registrationDate, String password, String email, Adress adress, String firstName, String lastName) {
-        this.id = id;
-        this.dateOfBirth = dateOfBirth;
-        this.desactivated = desactivated;
-        this.listOfPermis = listOfPermis;
-        this.registrationDate = registrationDate;
-        this.password = password;
-        this.email = email;
-        this.adress = adress;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+//    public Client(long id, String dateOfBirth, String desactivated, List<String> listOfPermis, String registrationDate, String password, String email, Adress adress, String firstName, String lastName) {
+//        this.id = id;
+//        this.dateOfBirth = dateOfBirth;
+//        this.desactivated = desactivated;
+//        this.listOfPermis = listOfPermis;
+//        this.registrationDate = registrationDate;
+//        this.password = password;
+//        this.email = email;
+//        this.adress = adress;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//    }
 
     public long getId() {
         return id;
@@ -61,7 +65,7 @@ public class Client {
     }
 
     public void setDateOfBirth(String dateOfBirth) {
-        dateOfBirth = dateOfBirth;
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getDesactivated() {
@@ -85,7 +89,7 @@ public class Client {
     }
 
     public void setRegistrationDate(String registrationDate) {
-        registrationDate = registrationDate;
+        this.registrationDate = registrationDate;
     }
 
     public String getPassword() {
