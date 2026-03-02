@@ -10,7 +10,7 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String dateOfBirth;
     private String desactivated;
     private List<String> listOfPermis;
@@ -18,13 +18,24 @@ public class Client {
     private String password;
     private String email;
     @OneToOne(cascade = CascadeType.ALL)
-    @Basic(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "adress_id")
+    @JoinColumn(name = "adress_id")
     private Adress adress;
     private String firstName;
     private String lastName;
 
-    public Client(int id, String dateOfBirth, String desactivated, List<String> listOfPermis, String registrationDate, String password, String email, Adress adress, String firstName, String lastName) {
+    public Client(String dateOfBirth, String desactivated, List<String> listOfPermis, String registrationDate, String password, String email, Adress adress, String firstName, String lastName) {
+        this.dateOfBirth = dateOfBirth;
+        this.desactivated = desactivated;
+        this.listOfPermis = listOfPermis;
+        this.registrationDate = registrationDate;
+        this.password = password;
+        this.email = email;
+        this.adress = adress;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    } // asupprimer ultérieurement
+
+    public Client(long id, String dateOfBirth, String desactivated, List<String> listOfPermis, String registrationDate, String password, String email, Adress adress, String firstName, String lastName) {
         this.id = id;
         this.dateOfBirth = dateOfBirth;
         this.desactivated = desactivated;
@@ -37,11 +48,11 @@ public class Client {
         this.lastName = lastName;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

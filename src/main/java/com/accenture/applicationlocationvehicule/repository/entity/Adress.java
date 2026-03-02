@@ -12,23 +12,29 @@ public class Adress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private int id;
+   private Long id;
    private String street;
    private String city;
    private String postalCode;
 
-    public Adress(int id, String street, String city, String postalCode) {
+    public Adress(String street, String city, String postalCode) {
+        this.street = street;
+        this.city = city;
+        this.postalCode = postalCode;
+    } // asupprimer par la suite
+
+    public Adress(long id, String street, String city, String postalCode) {
         this.id = id;
         this.street = street;
         this.city = city;
         this.postalCode = postalCode;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

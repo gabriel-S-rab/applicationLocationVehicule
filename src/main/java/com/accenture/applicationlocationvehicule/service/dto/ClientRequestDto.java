@@ -9,14 +9,14 @@ import jakarta.persistence.OneToOne;
 import java.util.List;
 
 public record ClientRequestDto(
-     int id,
+     Long id,
      String dateOfBirth,
      String desactivated,
      List<String> listOfPermis,
      String registrationDate,
      String password,
      String email,
-     Adress adress,
+     AdressRequestDto adress,
      String firstName,
      String lastName
 )

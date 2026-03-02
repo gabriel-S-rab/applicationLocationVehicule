@@ -1,7 +1,7 @@
 package com.accenture.applicationlocationvehicule.service.dto;
 
 public record AdressResponseDto(
-        int id,
+        Long id,
     String street,
     String city,
     String postalCode
