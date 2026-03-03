@@ -2,6 +2,8 @@ package com.accenture.applicationlocationvehicule.repository.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,6 +16,7 @@ public class Client {
     private String dateOfBirth;
     private String desactivated;
     @ElementCollection
+    @JoinTable(name = "client_list_of_permis")
     private List<String> listOfPermis;
     private String registrationDate;
     private String password;
@@ -37,20 +40,9 @@ public class Client {
         this.adress = adress;
         this.firstName = firstName;
         this.lastName = lastName;
-    } // asupprimer ultérieurement
+    }
 
-//    public Client(long id, String dateOfBirth, String desactivated, List<String> listOfPermis, String registrationDate, String password, String email, Adress adress, String firstName, String lastName) {
-//        this.id = id;
-//        this.dateOfBirth = dateOfBirth;
-//        this.desactivated = desactivated;
-//        this.listOfPermis = listOfPermis;
-//        this.registrationDate = registrationDate;
-//        this.password = password;
-//        this.email = email;
-//        this.adress = adress;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//    }
+
 
     public long getId() {
         return id;

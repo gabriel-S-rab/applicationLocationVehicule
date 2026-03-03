@@ -13,5 +13,6 @@ public interface ClientMapper {
 
 
     ClientResponseDto toClientResponseDto(Client client);
+
 }
 

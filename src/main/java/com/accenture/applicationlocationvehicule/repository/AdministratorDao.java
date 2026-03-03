@@ -1,7 +1,9 @@
 package com.accenture.applicationlocationvehicule.repository;
 
-import com.accenture.applicationlocationvehicule.repository.entity.Adminstrator;
+import com.accenture.applicationlocationvehicule.repository.entity.Administrator;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface AdministratorDao extends JpaRepository<Adminstrator , Integer> {
+@Repository
+public interface AdministratorDao extends JpaRepository<Administrator, Integer> {
 }

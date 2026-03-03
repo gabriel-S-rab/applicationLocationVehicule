@@ -5,10 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import java.util.UUID;
-
 @Entity
-public class Adminstrator {
+public class Administrator {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +17,7 @@ public class Adminstrator {
     private String email;
     private String password;
 
-    public Adminstrator(int id, String lastName, String firstName, String function, String email, String password) {
+    public Administrator(int id, String lastName, String firstName, String function, String email, String password) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;

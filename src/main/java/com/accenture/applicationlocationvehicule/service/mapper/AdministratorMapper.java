@@ -1,7 +1,8 @@
 package com.accenture.applicationlocationvehicule.service.mapper;
 
-import com.accenture.applicationlocationvehicule.repository.entity.Adminstrator;
+import com.accenture.applicationlocationvehicule.repository.entity.Administrator;
 import com.accenture.applicationlocationvehicule.service.dto.AdministratorRequestDto;
+import com.accenture.applicationlocationvehicule.service.dto.AdministratorResponseDto;
 import org.mapstruct.Mapper;
 
 
@@ -9,6 +10,8 @@ import org.mapstruct.Mapper;
 public interface AdministratorMapper {
 
 
-    Adminstrator toAdministrator(AdministratorRequestDto administratorRequestDto);
+    Administrator toAdministrator(AdministratorRequestDto administratorRequestDto);
+
+    AdministratorResponseDto toAdministratorResponseDto(Administrator administrator);
 }
 
