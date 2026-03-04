@@ -13,9 +13,11 @@ public interface ClientService {
     ClientResponseDto addClient(ClientRequestDto clientRequestDto);
 
 
-    ClientResponseDto findByIdClient(ClientRequestDto clientRequestDto);
+    ClientResponseDto findByClient(String email, String password);
 
     List<ClientResponseDto> findAllClient();
 
-    ClientResponseDto deleteByIdClient(ClientRequestDto clientRequestDto);
+    ClientResponseDto deleteByClient(String email ,String password);
+
+    ClientResponseDto updateClient(String email , String password , ClientRequestDto clientRequestDto);
 }

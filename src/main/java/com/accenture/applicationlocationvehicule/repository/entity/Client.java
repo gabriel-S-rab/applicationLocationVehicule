@@ -16,8 +16,8 @@ public class Client {
     private String dateOfBirth;
     private String desactivated;
     @ElementCollection
-    @JoinTable(name = "client_list_of_permis")
-    private List<String> listOfPermis;
+    @JoinTable(name = "client_list_of_licenses")
+    private List<String> listOfLicenses;
     private String registrationDate;
     private String password;
     private String email;
@@ -30,10 +30,10 @@ public class Client {
     public Client() {
     }
 
-    public Client(String dateOfBirth, String desactivated, List<String> listOfPermis, String registrationDate, String password, String email, Adress adress, String firstName, String lastName) {
+    public Client(String dateOfBirth, String desactivated, List<String> listOfLicenses, String registrationDate, String password, String email, Adress adress, String firstName, String lastName) {
         this.dateOfBirth = dateOfBirth;
         this.desactivated = desactivated;
-        this.listOfPermis = listOfPermis;
+        this.listOfLicenses = listOfLicenses;
         this.registrationDate = registrationDate;
         this.password = password;
         this.email = email;
@@ -68,12 +68,12 @@ public class Client {
         this.desactivated = desactivated;
     }
 
-    public List<String> getListOfPermis() {
-        return listOfPermis;
+    public List<String> getListOfLicenses() {
+        return listOfLicenses;
     }
 
-    public void setListOfPermis(List<String> listOfPermis) {
-        this.listOfPermis = listOfPermis;
+    public void setListOfLicenses(List<String> listOfLicenses) {
+        this.listOfLicenses = listOfLicenses;
     }
 
     public String getRegistrationDate() {

@@ -10,9 +10,9 @@ import java.util.List;
 
 public record ClientRequestDto(
      String dateOfBirth,
-     String desactivated,
-     List<String> listOfPermis,
-     String registrationDate,
+   //  String desactivated,
+     List<String> listOfLicenses,
+  //   String registrationDate,
      String password,
      String email,
      AdressRequestDto adress,

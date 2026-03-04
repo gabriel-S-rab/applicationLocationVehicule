@@ -9,6 +9,7 @@ import com.accenture.applicationlocationvehicule.service.dto.AdressResponseDto;
 import com.accenture.applicationlocationvehicule.service.mapper.AdministratorMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class AdministratorServiceImpl implements Administratorservice {
 
 
     @Override
+    @Transactional
     public AdministratorResponseDto addAdministrator(AdministratorRequestDto administratorRequestDto){
         if(administratorRequestDto.email() == null || administratorRequestDto.email().isBlank()
         || administratorRequestDto.firstName() == null || administratorRequestDto.firstName().isBlank()
