@@ -6,7 +6,7 @@ public record UtilityVehicleResponseDto(
      String brand,
      String model,
      String color,
-     String numberOfSeats,
+     int numberOfSeats,
      String fuelType,
      String Transmission,
      boolean airConditionning,

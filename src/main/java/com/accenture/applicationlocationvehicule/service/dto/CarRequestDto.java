@@ -1,7 +1,7 @@
 package com.accenture.applicationlocationvehicule.service.dto;
 
 public record CarRequestDto(
-     int id,
+        String name,
      int numberOfDoors,
      int dailyBaseRentalRate,
      String model,

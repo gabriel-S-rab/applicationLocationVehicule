@@ -4,15 +4,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
+
 
 @Entity
 public class Bike extends  Vehicle{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private int id;
     private int framSize;
     private String brand;
     private String color;
@@ -26,8 +29,11 @@ public class Bike extends  Vehicle{
     private String requiredLicense;
     private int dailyBaseRate;
 
-    public Bike(int id, int framSize, String brand, String color, boolean removedFromThePark, boolean active, int mileage, int weight, boolean electric, boolean discBrake, String type, String requiredLicense, int dailyBaseRate) {
-        this.id = id;
+    public Bike() {
+    }
+
+    public Bike(String name , int framSize, String brand, String color, boolean removedFromThePark, boolean active, int mileage, int weight, boolean electric, boolean discBrake, String type, String requiredLicense, int dailyBaseRate) {
+        super(name);
         this.framSize = framSize;
         this.brand = brand;
         this.color = color;
@@ -42,13 +48,6 @@ public class Bike extends  Vehicle{
         this.dailyBaseRate = dailyBaseRate;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getFramSize() {
         return framSize;

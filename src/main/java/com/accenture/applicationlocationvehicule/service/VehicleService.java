@@ -1,5 +1,7 @@
 package com.accenture.applicationlocationvehicule.service;
 
+import com.accenture.applicationlocationvehicule.repository.entity.Vehicle;
+import com.accenture.applicationlocationvehicule.service.dto.BoiteGenericDto;
 import com.accenture.applicationlocationvehicule.service.dto.VehicleRequestDto;
 import com.accenture.applicationlocationvehicule.service.dto.VehicleResponseDto;
 
@@ -11,7 +13,9 @@ public interface VehicleService {
 
     VehicleResponseDto findByIdVehicle(VehicleRequestDto vehicleRequestDto);
 
-    List<VehicleResponseDto> findAll();
+    List<BoiteGenericDto> findAll();
 
     VehicleResponseDto deleteByIdVehicle(VehicleRequestDto vehicleRequestDto);
+
+
 }

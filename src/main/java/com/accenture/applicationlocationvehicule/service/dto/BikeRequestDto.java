@@ -1,7 +1,7 @@
 package com.accenture.applicationlocationvehicule.service.dto;
 
 public record BikeRequestDto(
-     int id,
+     String name,
      int framSize,
      String brand,
      String color,

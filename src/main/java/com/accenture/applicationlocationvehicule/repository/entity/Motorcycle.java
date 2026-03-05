@@ -10,9 +10,9 @@ import java.util.UUID;
 @Entity
 public class Motorcycle extends Vehicle {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private int id;
     private int powerInKw;
     private String transmission;
     private String requiredLicense;
@@ -29,9 +29,11 @@ public class Motorcycle extends Vehicle {
     private String type;
     private int displacement;
 
+    public Motorcycle() {
+    }
 
-    public Motorcycle(int id, int powerInKw, String requiredLicense, String transmission, String brand, String model, String color, int numberOfCylinder, int seatHeight, int weight, boolean removedFromFleet, boolean active, int dailyBaseRate, int mileage, String type, int displacement) {
-        this.id = id;
+    public Motorcycle(String name , int powerInKw, String requiredLicense, String transmission, String brand, String model, String color, int numberOfCylinder, int seatHeight, int weight, boolean removedFromFleet, boolean active, int dailyBaseRate, int mileage, String type, int displacement) {
+        super(name);
         this.powerInKw = powerInKw;
         this.requiredLicense = requiredLicense;
         this.transmission = transmission;
@@ -49,13 +51,6 @@ public class Motorcycle extends Vehicle {
         this.displacement = displacement;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getPowerInKw() {
         return powerInKw;

@@ -1,7 +1,7 @@
 package com.accenture.applicationlocationvehicule.service.dto;
 
 public record MotorHomeRequestDto(
-     int id,
+        String name,
      boolean airConditionning,
      boolean refrigeratorEquipement,
      String brand,
@@ -19,5 +19,6 @@ public record MotorHomeRequestDto(
      int numberOfBed,
      boolean kitchenEquipement,
      int mileage
+        // ajouter un prix journalier
 )
     {}

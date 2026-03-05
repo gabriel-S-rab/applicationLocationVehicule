@@ -100,24 +100,18 @@ public class ClientServiceImpl implements ClientService{
     }
 
 
-
+    @Transactional
     public ClientResponseDto updateClient(String email , String password , ClientRequestDto clientRequestDto){
       ClientResponseDto clientResponseDto = findByClient(email,password);
                  Client newInfoClient = clientMapper.toClient(clientRequestDto);
                  Client clientExist = clientMapper.toClient(clientResponseDto);
             if (!clientExist.getPassword().equals(clientResponseDto.password()) && clientRequestDto.password() != null && !clientRequestDto.password().equals("string") && !clientRequestDto.password().isBlank())
                 clientExist.setPassword(clientResponseDto.password());
-
-            // a finir
                 if (!clientExist.getAdress().getCity().equals(newInfoClient.getAdress().getCity()) && clientRequestDto.adress().city() != null && !clientRequestDto.adress().city().equals("string") && !clientRequestDto.adress().city().isBlank()) {
                     if (!clientExist.getAdress().getStreet().equals(newInfoClient.getAdress().getStreet()) && clientRequestDto.adress().street() != null && !clientRequestDto.adress().street().equals("string") && !clientRequestDto.adress().street().isBlank()) {
                         if (!clientExist.getAdress().getPostalCode().equals(newInfoClient.getAdress().getPostalCode()) && clientRequestDto.adress().postalCode() != null && !clientRequestDto.adress().postalCode().equals("string") && !clientRequestDto.adress().postalCode().isBlank()) {
-//                        clientExist.getAdress().setCity(clientRequestDto.adress().city());
-//                        clientExist.getAdress().setStreet(clientRequestDto.adress().street());
-//                        clientExist.getAdress().setPostalCode(clientRequestDto.adress().postalCode());
                             Adress adress = new Adress(clientRequestDto.adress().street(), clientRequestDto.adress().city(), clientRequestDto.adress().postalCode());
                             clientExist.setAdress(adress);
-
                         } else {
                             throw new AdressException("tout les éléments de l'adresse doivent étre saisi");
                         }
@@ -127,9 +121,6 @@ public class ClientServiceImpl implements ClientService{
                 }else {
                     throw new AdressException("tout les champs doivent étre saisi");
                 }
-
-
-
                 if(!clientExist.getEmail().equals(clientRequestDto.email()) && clientRequestDto.email() != null && !clientRequestDto.email().equals("string") && !clientRequestDto.email().isBlank())
                     clientExist.setEmail(clientRequestDto.email());
                if(!clientExist.getFirstName().equals(clientRequestDto.firstName()) && clientRequestDto.firstName() != null && !clientRequestDto.firstName().equals("string") && !clientRequestDto.firstName().isBlank())
@@ -147,6 +138,9 @@ public class ClientServiceImpl implements ClientService{
                else
                    return clientResponseDto1;
     }
+
+
+
 
         }
 

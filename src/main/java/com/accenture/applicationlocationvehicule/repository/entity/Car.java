@@ -6,11 +6,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Car {
+public class Car extends Vehicle{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private int id;
     private int numberOfDoors;
     private int dailyBaseRentalRate;
     private String model;
@@ -26,8 +26,11 @@ public class Car {
     private String licenseRequired;
     private int mileage;
 
-    public Car(int id, int numberOfDoors, int dailyBaseRentalRate, String model, String brand, boolean removedFromTheFleet, boolean active, String color, int numberOfSeat, String typeOfFuel, boolean airConditionning, int numberOfLuggage, String type, String licenserequired, int mileage) {
-        this.id = id;
+    public Car() {
+    }
+
+    public Car(String name , int numberOfDoors, int dailyBaseRentalRate, String model, String brand, boolean removedFromTheFleet, boolean active, String color, int numberOfSeat, String typeOfFuel, boolean airConditionning, int numberOfLuggage, String type, String licenserequired, int mileage) {
+        super(name);
         this.numberOfDoors = numberOfDoors;
         this.dailyBaseRentalRate = dailyBaseRentalRate;
         this.model = model;
@@ -44,13 +47,6 @@ public class Car {
         this.mileage = mileage;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getNumberOfDoors() {
         return numberOfDoors;

@@ -1,11 +1,15 @@
 package com.accenture.applicationlocationvehicule.service.dto;
 
-import com.accenture.applicationlocationvehicule.repository.entity.Vehicle;
+import com.accenture.applicationlocationvehicule.repository.entity.*;
 
 
 public record VehicleRequestDto(
-     int id,
-     Vehicle vehicle
+    String typeVehicleChoice,
+    BikeRequestDto bike,
+    MotorcycleRequestDto motorcycle,
+    MotorHomeRequestDto motorhome,
+    CarRequestDto car,
+    UtilityVehicleRequestDto utilityVehicle
 )
 {}
 

@@ -10,14 +10,14 @@ import java.util.UUID;
 @Entity
 public class UtilityVehicle extends Vehicle{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private int id;
     private int baseRate;
     private String brand;
     private String model;
     private String color;
-    private String numberOfSeats;
+    private int numberOfSeats;
     private String fuelType;
     private String transmission;
     private boolean airConditionning;
@@ -30,8 +30,11 @@ public class UtilityVehicle extends Vehicle{
     private boolean removedFromFleet;
     private boolean active;
 
-    public UtilityVehicle(int id, int baseRate, String brand, String model, String color, String numberOfSeats, String fuelType, String transmission, boolean airConditionning, int maximumLoad, int weight, int capacity, String type, String license, int mileage, boolean removedFromFleet, boolean active) {
-        this.id = id;
+    public UtilityVehicle() {
+    }
+
+    public UtilityVehicle(String name , int baseRate, String brand, String model, String color, int numberOfSeats, String fuelType, String transmission, boolean airConditionning, int maximumLoad, int weight, int capacity, String type, String license, int mileage, boolean removedFromFleet, boolean active) {
+        super(name);
         this.baseRate = baseRate;
         this.brand = brand;
         this.model = model;
@@ -50,13 +53,6 @@ public class UtilityVehicle extends Vehicle{
         this.active = active;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getBaseRate() {
         return baseRate;
@@ -90,11 +86,11 @@ public class UtilityVehicle extends Vehicle{
         this.color = color;
     }
 
-    public String getNumberOfSeats() {
+    public int getNumberOfSeats() {
         return numberOfSeats;
     }
 
-    public void setNumberOfSeats(String numberOfSeats) {
+    public void setNumberOfSeats(int numberOfSeats) {
         this.numberOfSeats = numberOfSeats;
     }
 

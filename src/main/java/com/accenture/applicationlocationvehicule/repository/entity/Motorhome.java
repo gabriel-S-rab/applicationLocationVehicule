@@ -8,9 +8,9 @@ import jakarta.persistence.Id;
 @Entity
 public class Motorhome extends Vehicle{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private int id;
     private boolean airConditionning;
     private boolean refrigeratorEquipement;
     private String brand;
@@ -29,9 +29,11 @@ public class Motorhome extends Vehicle{
     private boolean kitchenEquipement;
     private int mileage;
 
-    public Motorhome(int id, boolean airConditionning, boolean refrigeratorEquipement, String brand, String model, String color, int numberOfSeats, String fuelType, String transmission, int weight, String requiredLicense, String type, boolean showerEquipement, boolean bedlinen, int height, int numberOfBed, boolean kitchenEquipement, int mileage) {
-        super();
-        this.id = id;
+    public Motorhome() {
+    }
+
+    public Motorhome(String name , boolean airConditionning, boolean refrigeratorEquipement, String brand, String model, String color, int numberOfSeats, String fuelType, String transmission, int weight, String requiredLicense, String type, boolean showerEquipement, boolean bedlinen, int height, int numberOfBed, boolean kitchenEquipement, int mileage) {
+        super(name);
         this.airConditionning = airConditionning;
         this.refrigeratorEquipement = refrigeratorEquipement;
         this.brand = brand;
@@ -51,13 +53,6 @@ public class Motorhome extends Vehicle{
         this.mileage = mileage;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public boolean isAirConditionning() {
         return airConditionning;

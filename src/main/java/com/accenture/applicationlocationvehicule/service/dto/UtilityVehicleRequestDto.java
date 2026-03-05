@@ -1,12 +1,12 @@
 package com.accenture.applicationlocationvehicule.service.dto;
 
 public record UtilityVehicleRequestDto(
-     int id,
+        String name,
      int baseRate,
      String brand,
      String model,
      String color,
-     String numberOfSeats,
+     int numberOfSeats,
      String fuelType,
      String transmission,
      boolean airConditionning,
