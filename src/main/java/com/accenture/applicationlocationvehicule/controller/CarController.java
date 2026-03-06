@@ -1,11 +1,10 @@
 package com.accenture.applicationlocationvehicule.controller;
 
 import com.accenture.applicationlocationvehicule.service.CarService;
+import com.accenture.applicationlocationvehicule.service.dto.CarRequestDto;
 import com.accenture.applicationlocationvehicule.service.dto.CarResponseDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +18,7 @@ public class CarController {
         this.carService = carService;
     }
 
+
     @GetMapping
     public ResponseEntity<List<CarResponseDto>>  findALL(){
          List<CarResponseDto> listCarResponsedto = carService.findAllCar();
@@ -26,8 +26,20 @@ public class CarController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CarResponseDto> findById(){
-        CarResponseDto carResponseDto = carService.findByIdCar(int id)
+    public ResponseEntity<CarResponseDto> findById(@RequestHeader(name = "id") Long id){
+        CarResponseDto carResponseDto = carService.findByIdCar(id);
+        return ResponseEntity.ok(carResponseDto);
     }
 
+    @GetMapping("/onTheFleet")
+    public ResponseEntity<List<CarResponseDto>> findByRemovedFleet(@RequestHeader(name = "removed_from_the_fleet") boolean removedFromTheFleet){
+        List<CarResponseDto> listCarResponseDto = carService.findByRemovedFleet(removedFromTheFleet);
+        return ResponseEntity.ok(listCarResponseDto);
+    }
+
+    @PatchMapping
+    public ResponseEntity<CarResponseDto>  updateCar(@RequestHeader(name = "id") Long id , @RequestBody CarRequestDto carRequestDto){
+      CarResponseDto carResponseDto =  carService.updateCar(id , carRequestDto);
+        return ResponseEntity.ok(carResponseDto);
+    }
 }
