@@ -13,5 +13,5 @@ AdministratorResponseDto findByIdAdministrator(AdministratorRequestDto administr
 
   List<AdministratorResponseDto> findAllAdministrator();
 
-AdministratorResponseDto deleteByIdAdministrator(AdministratorRequestDto administratorRequestDto);
+AdministratorResponseDto deleteByIdAdministrator(int id);
 }

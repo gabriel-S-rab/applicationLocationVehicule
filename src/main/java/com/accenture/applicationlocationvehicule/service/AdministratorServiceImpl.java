@@ -5,9 +5,10 @@ import com.accenture.applicationlocationvehicule.repository.AdministratorDao;
 import com.accenture.applicationlocationvehicule.repository.entity.Administrator;
 import com.accenture.applicationlocationvehicule.service.dto.AdministratorRequestDto;
 import com.accenture.applicationlocationvehicule.service.dto.AdministratorResponseDto;
-import com.accenture.applicationlocationvehicule.service.dto.AdressResponseDto;
 import com.accenture.applicationlocationvehicule.service.mapper.AdministratorMapper;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,11 +19,13 @@ public class AdministratorServiceImpl implements Administratorservice {
 
     private final AdministratorDao administratorDao;
     private final AdministratorMapper administratorMapper;
+    private final PasswordEncoder passwordEncoder;
 
 
-    public AdministratorServiceImpl(AdministratorDao administratorDao, AdministratorMapper administratorMapper) {
+    public AdministratorServiceImpl(AdministratorDao administratorDao, AdministratorMapper administratorMapper, PasswordEncoder passwordEncoder) {
         this.administratorDao = administratorDao;
         this.administratorMapper = administratorMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -36,6 +39,7 @@ public class AdministratorServiceImpl implements Administratorservice {
         || administratorRequestDto.function() == null || administratorRequestDto.function().isBlank())
             throw new AdministratorException("erreur lors de l'ajout de l'administrateur"+ HttpStatus.BAD_REQUEST);
         Administrator administrator = administratorMapper.toAdministrator(administratorRequestDto);
+        administrator.setPassword(passwordEncoder.encode(administratorRequestDto.password()));
         Administrator administratorSaved = administratorDao.save(administrator);
         if(administratorSaved == null)
             throw new AdministratorException("erreur lors de l'ajout de l'admministrateur"+HttpStatus.BAD_REQUEST);
@@ -48,13 +52,21 @@ public class AdministratorServiceImpl implements Administratorservice {
         return null;
     }
 
+
     @Override
     public List<AdministratorResponseDto> findAllAdministrator() {
         return List.of();
     }
 
+
     @Override
-    public AdministratorResponseDto deleteByIdAdministrator(AdministratorRequestDto administratorRequestDto) {
-        return null;
+    public AdministratorResponseDto deleteByIdAdministrator(int id){
+        try {
+            Administrator administratorExist = administratorDao.getReferenceById(id);
+            administratorDao.delete(administratorExist);
+            return administratorMapper.toAdministratorResponseDto(administratorExist);
+        }catch (EntityNotFoundException e){
+            throw new AdministratorException("erreur");
+        }
     }
 }

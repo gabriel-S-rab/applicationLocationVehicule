@@ -15,15 +15,21 @@ public class Client {
     private Long id;
     private String dateOfBirth;
     private String desactivated;
+
     @ElementCollection
     @JoinTable(name = "client_list_of_licenses")
     private List<String> listOfLicenses;
+
     private String registrationDate;
     private String password;
+
+    @Column(unique = true)
     private String email;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "adress_id")
     private Adress adress;
+
     private String firstName;
     private String lastName;
 

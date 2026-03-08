@@ -1,9 +1,6 @@
 package com.accenture.applicationlocationvehicule.repository.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Administrator {
@@ -11,11 +8,18 @@ public class Administrator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String lastName;
     private String firstName;
     private String function;
+
+    @Column(unique = true)
     private String email;
+
     private String password;
+
+    public Administrator() {
+    }
 
     public Administrator(int id, String lastName, String firstName, String function, String email, String password) {
         this.id = id;

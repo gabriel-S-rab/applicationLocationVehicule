@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/Administrator")
+@RequestMapping("/Administrators")
 public class AdministratorController {
 
     private final Administratorservice administratorservice;
@@ -18,11 +18,17 @@ public class AdministratorController {
     }
 
 
-    @PostMapping("/addAdministrator")
+    @PostMapping("/Administrator")
     public ResponseEntity<String> addAdministrator(@RequestBody AdministratorRequestDto administratorRequestDto){
         administratorservice.addAdministrator(administratorRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+
+    @DeleteMapping("/Administrator")
+    public ResponseEntity<String> deleteAdministrator(@RequestHeader(name = "id") int id) {
+        administratorservice.deleteByIdAdministrator(id);
+        return ResponseEntity.ok("l'administrateur a bien était supprimer "+HttpStatus.ACCEPTED);
+    }
 
 }
