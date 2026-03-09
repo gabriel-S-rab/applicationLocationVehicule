@@ -10,13 +10,13 @@ import com.accenture.applicationlocationvehicule.service.dto.ClientResponseDto;
 import com.accenture.applicationlocationvehicule.service.mapper.AdressMapper;
 import com.accenture.applicationlocationvehicule.service.mapper.ClientMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 
@@ -28,12 +28,14 @@ public class ClientServiceImpl implements ClientService{
     private final AdressMapper adressMapper;
     private final ClientMapper clientMapper;
     private final ClientDao clientDao;
+    private final PasswordEncoder passwordEncoder;
 
 
-    public ClientServiceImpl(AdressMapper adressMapper, ClientMapper clientMapper, ClientDao clientDao) {
+    public ClientServiceImpl(AdressMapper adressMapper, ClientMapper clientMapper, ClientDao clientDao, PasswordEncoder passwordEncoder) {
         this.adressMapper = adressMapper;
         this.clientMapper = clientMapper;
         this.clientDao = clientDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -53,6 +55,7 @@ public class ClientServiceImpl implements ClientService{
       String stringDateFormat = dateForma.format(dateToday);
        client.setRegistrationDate(stringDateFormat);
        client.setDesactivated("false");
+       client.setPassword(passwordEncoder.encode(clientRequestDto.password()));
         Client saved  =  clientDao.save(client);
       if(saved == null)
           throw new ClientException("erreur lors de l'ajout du client"+HttpStatus.BAD_REQUEST);
@@ -65,12 +68,14 @@ public class ClientServiceImpl implements ClientService{
     @Override
     public ClientResponseDto findByClient(String email, String password){  // gerer retour password (dto spécifique / gestion controller ?)
      Optional<Client> optClient =  clientDao.findByEmail(email);
-      if(optClient.isPresent() && optClient.get().getPassword().equals(password)){
+      if(optClient.isPresent()  /*optClient.get().getPassword().equals(password)*/){
            Client client = optClient.get();
-          // client.setPassword("**********");
-       //    client.setDesactivated(null);
-         ClientResponseDto clientResponseDto = clientMapper.toClientResponseDto(client);
-         return clientResponseDto;
+           if(passwordEncoder.matches(password, client.getPassword())) {
+               // client.setPassword("**********");
+               //    client.setDesactivated(null);
+               ClientResponseDto clientResponseDto = clientMapper.toClientResponseDto(client);
+               return clientResponseDto;
+           }
     } else if(optClient.isEmpty() || !optClient.get().getPassword().equals(password)){
           throw new ClientException("erreur lors de la recuperation des informations du client"+HttpStatus.BAD_REQUEST);
       }
@@ -101,44 +106,46 @@ public class ClientServiceImpl implements ClientService{
 
 
     @Transactional
-    public ClientResponseDto updateClient(String email , String password , ClientRequestDto clientRequestDto){
-      ClientResponseDto clientResponseDto = findByClient(email,password);
-                 Client newInfoClient = clientMapper.toClient(clientRequestDto);
-                 Client clientExist = clientMapper.toClient(clientResponseDto);
+    public ClientResponseDto updateClient(String email , String password , ClientRequestDto clientRequestDto) {
+        ClientResponseDto clientResponseDto = findByClient(email, password);
+        if (passwordEncoder.matches(password,clientResponseDto.password())) {
+            Client newInfoClient = clientMapper.toClient(clientRequestDto);
+            Client clientExist = clientMapper.toClient(clientResponseDto);
             if (!clientExist.getPassword().equals(clientResponseDto.password()) && clientRequestDto.password() != null && !clientRequestDto.password().equals("string") && !clientRequestDto.password().isBlank())
                 clientExist.setPassword(clientResponseDto.password());
-                if (!clientExist.getAdress().getCity().equals(newInfoClient.getAdress().getCity()) && clientRequestDto.adress().city() != null && !clientRequestDto.adress().city().equals("string") && !clientRequestDto.adress().city().isBlank()) {
-                    if (!clientExist.getAdress().getStreet().equals(newInfoClient.getAdress().getStreet()) && clientRequestDto.adress().street() != null && !clientRequestDto.adress().street().equals("string") && !clientRequestDto.adress().street().isBlank()) {
-                        if (!clientExist.getAdress().getPostalCode().equals(newInfoClient.getAdress().getPostalCode()) && clientRequestDto.adress().postalCode() != null && !clientRequestDto.adress().postalCode().equals("string") && !clientRequestDto.adress().postalCode().isBlank()) {
-                            Adress adress = new Adress(clientRequestDto.adress().street(), clientRequestDto.adress().city(), clientRequestDto.adress().postalCode());
-                            clientExist.setAdress(adress);
-                        } else {
-                            throw new AdressException("tout les éléments de l'adresse doivent étre saisi");
-                        }
+            if (!clientExist.getAdress().getCity().equals(newInfoClient.getAdress().getCity()) && clientRequestDto.adress().city() != null && !clientRequestDto.adress().city().equals("string") && !clientRequestDto.adress().city().isBlank()) {
+                if (!clientExist.getAdress().getStreet().equals(newInfoClient.getAdress().getStreet()) && clientRequestDto.adress().street() != null && !clientRequestDto.adress().street().equals("string") && !clientRequestDto.adress().street().isBlank()) {
+                    if (!clientExist.getAdress().getPostalCode().equals(newInfoClient.getAdress().getPostalCode()) && clientRequestDto.adress().postalCode() != null && !clientRequestDto.adress().postalCode().equals("string") && !clientRequestDto.adress().postalCode().isBlank()) {
+                        Adress adress = new Adress(clientRequestDto.adress().street(), clientRequestDto.adress().city(), clientRequestDto.adress().postalCode());
+                        clientExist.setAdress(adress);
                     } else {
-                        throw new AdressException("tout les éléménts de l'adresse doivent étre saisi");
+                        throw new AdressException("tout les éléments de l'adresse doivent étre saisi");
                     }
-                }else {
-                    throw new AdressException("tout les champs doivent étre saisi");
+                } else {
+                    throw new AdressException("tout les éléménts de l'adresse doivent étre saisi");
                 }
-                if(!clientExist.getEmail().equals(clientRequestDto.email()) && clientRequestDto.email() != null && !clientRequestDto.email().equals("string") && !clientRequestDto.email().isBlank())
-                    clientExist.setEmail(clientRequestDto.email());
-               if(!clientExist.getFirstName().equals(clientRequestDto.firstName()) && clientRequestDto.firstName() != null && !clientRequestDto.firstName().equals("string") && !clientRequestDto.firstName().isBlank())
-                   clientExist.setFirstName(clientRequestDto.firstName());
-               if(!clientExist.getLastName().equals(clientRequestDto.lastName()) && clientRequestDto.lastName() != null && !clientRequestDto.lastName().equals("string") && !clientRequestDto.lastName().isBlank())
-                   clientExist.setLastName(clientRequestDto.lastName());
-               if(!clientExist.getDateOfBirth().equals(clientRequestDto.dateOfBirth()) && clientRequestDto.dateOfBirth() != null && !clientRequestDto.dateOfBirth().equals("string") && !clientRequestDto.dateOfBirth().isBlank())
-                   clientExist.setDateOfBirth(clientRequestDto.dateOfBirth());
-               if(!clientExist.getListOfLicenses().equals(clientRequestDto.listOfLicenses()))
-                   clientExist.setListOfLicenses(clientRequestDto.listOfLicenses());
-               Client saved = clientDao.saveAndFlush(clientExist);
-               ClientResponseDto clientResponseDto1 = clientMapper.toClientResponseDto(saved);
-               if(saved == null)
-                   throw new ClientException("erruer lors de la modification du client");
-               else
-                   return clientResponseDto1;
+            } else {
+                throw new AdressException("tout les champs doivent étre saisi");
+            }
+            if (!clientExist.getEmail().equals(clientRequestDto.email()) && clientRequestDto.email() != null && !clientRequestDto.email().equals("string") && !clientRequestDto.email().isBlank())
+                clientExist.setEmail(clientRequestDto.email());
+            if (!clientExist.getFirstName().equals(clientRequestDto.firstName()) && clientRequestDto.firstName() != null && !clientRequestDto.firstName().equals("string") && !clientRequestDto.firstName().isBlank())
+                clientExist.setFirstName(clientRequestDto.firstName());
+            if (!clientExist.getLastName().equals(clientRequestDto.lastName()) && clientRequestDto.lastName() != null && !clientRequestDto.lastName().equals("string") && !clientRequestDto.lastName().isBlank())
+                clientExist.setLastName(clientRequestDto.lastName());
+            if (!clientExist.getDateOfBirth().equals(clientRequestDto.dateOfBirth()) && clientRequestDto.dateOfBirth() != null && !clientRequestDto.dateOfBirth().equals("string") && !clientRequestDto.dateOfBirth().isBlank())
+                clientExist.setDateOfBirth(clientRequestDto.dateOfBirth());
+            if (!clientExist.getListOfLicenses().equals(clientRequestDto.listOfLicenses()))
+                clientExist.setListOfLicenses(clientRequestDto.listOfLicenses());
+            Client saved = clientDao.saveAndFlush(clientExist);
+            ClientResponseDto clientResponseDto1 = clientMapper.toClientResponseDto(saved);
+            if (saved == null)
+                throw new ClientException("erruer lors de la modification du client");
+            else
+                return clientResponseDto1;
+        }
+         throw new ClientException("erreur");
     }
-
 
 
 

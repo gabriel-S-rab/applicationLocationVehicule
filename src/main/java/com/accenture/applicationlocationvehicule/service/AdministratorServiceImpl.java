@@ -1,6 +1,7 @@
 package com.accenture.applicationlocationvehicule.service;
 
 import com.accenture.applicationlocationvehicule.exception.AdministratorException;
+import com.accenture.applicationlocationvehicule.exception.AuthException;
 import com.accenture.applicationlocationvehicule.repository.AdministratorDao;
 import com.accenture.applicationlocationvehicule.repository.entity.Administrator;
 import com.accenture.applicationlocationvehicule.service.dto.AdministratorRequestDto;
@@ -55,18 +56,24 @@ public class AdministratorServiceImpl implements Administratorservice {
 
     @Override
     public List<AdministratorResponseDto> findAllAdministrator() {
-        return List.of();
+        List<Administrator> listAdminisrator = administratorDao.findAll();
+        return administratorMapper.toAdministratorResponseDto(listAdminisrator);
     }
 
 
     @Override
     public AdministratorResponseDto deleteByIdAdministrator(int id){
-        try {
-            Administrator administratorExist = administratorDao.getReferenceById(id);
-            administratorDao.delete(administratorExist);
-            return administratorMapper.toAdministratorResponseDto(administratorExist);
-        }catch (EntityNotFoundException e){
-            throw new AdministratorException("erreur");
+        List<AdministratorResponseDto>  listAdministratorResponseDto = findAllAdministrator();
+        if(listAdministratorResponseDto.size() > 1) {
+            try {
+
+                Administrator administratorExist = administratorDao.getReferenceById(id);
+                administratorDao.delete(administratorExist);
+                return administratorMapper.toAdministratorResponseDto(administratorExist);
+            } catch (EntityNotFoundException e) {
+                throw new AdministratorException("erreur");
+            }
         }
+        throw new AuthException("erreur");
     }
 }

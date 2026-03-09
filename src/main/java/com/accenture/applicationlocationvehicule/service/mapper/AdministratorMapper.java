@@ -5,6 +5,8 @@ import com.accenture.applicationlocationvehicule.service.dto.AdministratorReques
 import com.accenture.applicationlocationvehicule.service.dto.AdministratorResponseDto;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 
 @Mapper(componentModel = "spring")
 public interface AdministratorMapper {
@@ -13,5 +15,7 @@ public interface AdministratorMapper {
     Administrator toAdministrator(AdministratorRequestDto administratorRequestDto);
 
     AdministratorResponseDto toAdministratorResponseDto(Administrator administrator);
+
+    List<AdministratorResponseDto> toAdministratorResponseDto(List<Administrator> administrateur);
 }
 
