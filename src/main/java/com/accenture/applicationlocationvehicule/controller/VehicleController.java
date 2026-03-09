@@ -22,14 +22,14 @@ public class VehicleController {
         this.vehicleService = vehicleService;
     }
 
-    @Operation(summary = "ajout d'un véhicule", description = "ajout d'un véhicule , saisir un choix et completer la partie en rapport avec ce type")
+    @Operation(summary = "ajout d'un véhicule", description = "Ajout d’un véhicule : saisir un choix et compléter la partie en rapport avec ce type.")
     @PutMapping("/vehicle")
     public ResponseEntity<String> addVehicle(@RequestBody VehicleRequestDto vehicleRequestDto){
       VehicleResponseDto vehicleResponseDto =  vehicleService.addVehicle(vehicleRequestDto);
         return ResponseEntity.ok("véhicule ajouter "+HttpStatus.CREATED);
     }
 
-    @Operation(summary = "récupération des vehicules", description = "récupération de la liste des véhicules")
+    @Operation(summary = "Récupération des véhicules", description = "récupération de la liste des véhicules")
     @GetMapping
     public ResponseEntity<List<BoiteGenericDto>> findAll(){
         List<BoiteGenericDto>  listeVehicle = vehicleService.findAll();

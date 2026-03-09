@@ -20,33 +20,35 @@ public class ClientController {
     }
 
 
-    @Operation(description = "ajout d'un client", summary = "ajout d'un nouveau client")
+    @Operation(description = "Ajout d'un client", summary = "Ajout d'un nouveau client")
     @PutMapping("/client")
     public ResponseEntity<String> addClient(@RequestBody ClientRequestDto clientRequestDto){
         ClientResponseDto clientResponseDto = clientService.addClient(clientRequestDto);
-        return  new ResponseEntity<>(HttpStatus.CREATED); // a modifier
+        return  ResponseEntity.status(HttpStatus.CREATED).body("Client ajouté avec succès");
     }
 
-    @Operation(description = "récupération d'un client" , summary = "récupération d'un client")
+
+    @Operation(description = "Récupération d'un client" , summary = "Récupération d'un client")
     @GetMapping("/account")
     public ResponseEntity<ClientResponseDto> findByClient(@RequestHeader(name = "email") String email , @RequestHeader(name = "password") String password){
         ClientResponseDto clientResponseDto = clientService.findByClient(email , password);
-        return ResponseEntity.ok(clientResponseDto); // a modifier
+        return ResponseEntity.status(HttpStatus.OK).body(clientResponseDto);
     }
 
-    @Operation(description = "suppression d'un client", summary = "suppression d'un client")
+
+    @Operation(description = "Suppression d'un client", summary = "Suppression d'un client")
     @DeleteMapping
     public ResponseEntity<String> deleteByClient(@RequestHeader(name = "email") String email ,@RequestHeader(name = "password") String password){
         clientService.deleteByClient(email,password);
-        return ResponseEntity.ok("ok");
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Client supprimé avec succès");
     }
 
 
-    @Operation(description = "modification d'un client" , summary = "modification d'un client")
+    @Operation(description = "Modification d'un client" , summary = "Modification d'un client")
     @PatchMapping
     public  ResponseEntity<String> updateClient(@RequestHeader(name = "email") String email , @RequestHeader(name = "password") String password , @RequestBody ClientRequestDto clientRequestDto){
         clientService.updateClient(email, password , clientRequestDto);
-        return ResponseEntity.ok("client modifier "+HttpStatus.ACCEPTED);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Client modifié avec succès");
     }
 
 

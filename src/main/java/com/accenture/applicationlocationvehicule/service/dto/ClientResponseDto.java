@@ -9,9 +9,9 @@ import jakarta.persistence.OneToOne;
 import java.util.List;
 
 public record ClientResponseDto(
-     Long id,
+     int id,
      String dateOfBirth,
-     String desactivated,
+     boolean desactivated,
      List<String> listOfLicenses,
      String registrationDate,
      String password,
