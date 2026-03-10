@@ -1,15 +1,13 @@
 package com.accenture.applicationlocationvehicule.service.dto;
 
 import com.accenture.applicationlocationvehicule.repository.entity.Adress;
-import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToOne;
+
 
 import java.util.List;
+import java.util.UUID;
 
 public record ClientResponseDto(
-     int id,
+     UUID id,
      String dateOfBirth,
      boolean desactivated,
      List<String> listOfLicenses,

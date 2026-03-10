@@ -7,6 +7,7 @@ import com.accenture.applicationlocationvehicule.service.dto.MotorcycleRequestDt
 import java.util.List;
 
 public class MotorhomeServiceImpl implements MotorhomeService{
+
     @Override
     public MotorHomeResponseDto addMotohome(MotorHomeRequestDto motorhomeRequestDto) {
         return null;

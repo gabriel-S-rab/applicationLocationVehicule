@@ -8,9 +8,9 @@ import com.accenture.applicationlocationvehicule.service.dto.CarResponseDto;
 import com.accenture.applicationlocationvehicule.service.mapper.CarMapper;
 import org.springframework.stereotype.Service;
 
-import javax.smartcardio.CardException;
+
 import java.util.List;
-import java.util.Locale;
+import java.util.UUID;
 
 
 @Service
@@ -33,7 +33,7 @@ public class CarServiceImpl implements CarService{
 
 
     @Override
-    public CarResponseDto findByIdCar(Long id) {
+    public CarResponseDto findByIdCar(UUID id) {
     Car car = carDao.getReferenceById(id);
         return carMapper.toCarResponseDto(car);
     }
@@ -60,7 +60,7 @@ public class CarServiceImpl implements CarService{
     }
 
     @Override
-    public CarResponseDto updateCar(Long id ,CarRequestDto carRequestDto) {
+    public CarResponseDto updateCar(UUID id ,CarRequestDto carRequestDto) {
         if(carRequestDto == null || carRequestDto.numberOfDoors() < 0
                 || carRequestDto.dailyBaseRentalRate() < 0
                 || carRequestDto.model() == null || carRequestDto.model().isBlank()
@@ -88,8 +88,6 @@ public class CarServiceImpl implements CarService{
             oldCar.setDailyBaseRentalRate(carRequestDto.dailyBaseRentalRate());
         if(!oldCar.getModel().equals(carRequestDto.model()))
             oldCar.setModel(carRequestDto.model());
-//        if(!oldCar.getLicenserequired().equals(carRequestDto.licenseRequired()))
-//            oldCar.setLicenserequired(carRequestDto.licenseRequired());
         if(oldCar.getMileage() != carRequestDto.mileage())
             oldCar.setMileage(carRequestDto.mileage());
         if(oldCar.getNumberOfDoors() != carRequestDto.numberOfDoors())

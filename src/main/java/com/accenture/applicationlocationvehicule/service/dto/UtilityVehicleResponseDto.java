@@ -1,7 +1,9 @@
 package com.accenture.applicationlocationvehicule.service.dto;
 
+import java.util.UUID;
+
 public record UtilityVehicleResponseDto(
-     int id,
+     UUID id,
      int baseRate,
      String brand,
      String model,

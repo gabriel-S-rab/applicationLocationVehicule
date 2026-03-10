@@ -1,16 +1,12 @@
 package com.accenture.applicationlocationvehicule.repository.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
 
 @Entity
 public class Car extends Vehicle{
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private int id;
+
     private int numberOfDoors;
     private int dailyBaseRentalRate;
     private String model;
@@ -148,9 +144,6 @@ public class Car extends Vehicle{
         return licenseRequired;
     }
 
-    public void setLicenserequired(String licenserequired) {
-        this.licenseRequired = licenserequired;
-    }
 
     public int getMileage() {
         return mileage;

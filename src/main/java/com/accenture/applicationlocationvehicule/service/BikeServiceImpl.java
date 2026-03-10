@@ -11,6 +11,7 @@ import com.accenture.applicationlocationvehicule.service.mapper.BikeMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class BikeServiceImpl implements  BikeService{
@@ -31,7 +32,7 @@ public class BikeServiceImpl implements  BikeService{
 
 
     @Override
-    public BikeResponseDto findByIdBike(Long id) {
+    public BikeResponseDto findByIdBike(UUID id) {
         Bike bike = bikeDao.getReferenceById(id);
         return bikeMapper.toBikeResponseDto(bike);
     }
@@ -46,7 +47,7 @@ public class BikeServiceImpl implements  BikeService{
 
 
     @Override
-    public BikeResponseDto updateBike(Long id, BikeRequestDto bikeRequestDto) {
+    public BikeResponseDto updateBike(UUID id, BikeRequestDto bikeRequestDto) {
            BikeResponseDto bikeResponseDto = findByIdBike(id);
            Vehicle vehicle = vehicleDao.getReferenceById(id);
            if(bikeResponseDto == null)

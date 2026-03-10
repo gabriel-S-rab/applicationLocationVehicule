@@ -11,8 +11,8 @@ import java.util.UUID;
 public class Adress {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+   private UUID id;
    private String street;
    private String city;
    private String postalCode;
@@ -24,20 +24,13 @@ public class Adress {
         this.street = street;
         this.city = city;
         this.postalCode = postalCode;
-    } // asupprimer par la suite
+    }
 
-//    public Adress(Long id, String street, String city, String postalCode) {
-//        this.id = id;
-//        this.street = street;
-//        this.city = city;
-//        this.postalCode = postalCode;
-//    }
-
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

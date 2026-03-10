@@ -1,7 +1,9 @@
 package com.accenture.applicationlocationvehicule.service.dto;
 
+import java.util.UUID;
+
 public record MotorHomeResponseDto(
-     int id,
+    UUID id,
      boolean airConditionning,
      boolean refrigeratorEquipement,
      String brand,

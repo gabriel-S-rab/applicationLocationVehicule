@@ -1,6 +1,6 @@
 package com.accenture.applicationlocationvehicule.service.dto;
 
-import com.accenture.applicationlocationvehicule.repository.entity.*;
+
 
 
 public record VehicleRequestDto(

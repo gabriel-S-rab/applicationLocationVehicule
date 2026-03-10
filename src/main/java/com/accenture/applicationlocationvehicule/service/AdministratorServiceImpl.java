@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AdministratorServiceImpl implements Administratorservice {
@@ -62,7 +63,7 @@ public class AdministratorServiceImpl implements Administratorservice {
 
 
     @Override
-    public AdministratorResponseDto deleteByIdAdministrator(int id){
+    public AdministratorResponseDto deleteByIdAdministrator(UUID id){
         List<AdministratorResponseDto>  listAdministratorResponseDto = findAllAdministrator();
         if(listAdministratorResponseDto.size() > 1) {
             try {

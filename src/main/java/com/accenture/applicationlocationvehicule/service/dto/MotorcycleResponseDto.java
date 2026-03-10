@@ -1,7 +1,9 @@
 package com.accenture.applicationlocationvehicule.service.dto;
 
+import java.util.UUID;
+
 public record MotorcycleResponseDto(
-     int id,
+     UUID id,
      int powerInKw,
      String Transmission,
      String requiredLicense,

@@ -1,15 +1,19 @@
 package com.accenture.applicationlocationvehicule.service;
 
+import com.accenture.applicationlocationvehicule.ApplicationLocationVehiculeApplication;
 import com.accenture.applicationlocationvehicule.exception.VehicleException;
 import com.accenture.applicationlocationvehicule.repository.VehicleDao;
 import com.accenture.applicationlocationvehicule.repository.entity.*;
 import com.accenture.applicationlocationvehicule.service.dto.*;
 import com.accenture.applicationlocationvehicule.service.mapper.*;
+import org.springframework.boot.web.server.Http2;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class VehicleServiceImpl implements VehicleService{
@@ -23,11 +27,11 @@ public class VehicleServiceImpl implements VehicleService{
     private final UtilityVehicleMapper utilityVehicleMapper;
     private final VehicleDao vehicleDao;
     private final VehicleMapper vehicleMapper;
-  //  private BoiteGenericDto boiteGenericDto;
 
 
 
-    public VehicleServiceImpl(CarMapper carMapper, MotorhomeMapper motorhomeMapper, MotorcycleMapper motorcycleMapper, BikeMapper bikeMapper, UtilityVehicleMapper utilityVehicleMapper, VehicleDao vehicleDao, VehicleMapper vehicleMapper /*, BoiteGenericDto boiteGenericDto */) {
+
+    public VehicleServiceImpl(CarMapper carMapper, MotorhomeMapper motorhomeMapper, MotorcycleMapper motorcycleMapper, BikeMapper bikeMapper, UtilityVehicleMapper utilityVehicleMapper, VehicleDao vehicleDao, VehicleMapper vehicleMapper) {
         this.carMapper = carMapper;
         this.motorhomeMapper = motorhomeMapper;
         this.motorcycleMapper = motorcycleMapper;
@@ -35,7 +39,6 @@ public class VehicleServiceImpl implements VehicleService{
         this.utilityVehicleMapper = utilityVehicleMapper;
         this.vehicleDao = vehicleDao;
         this.vehicleMapper = vehicleMapper;
-     //   this.boiteGenericDto = boiteGenericDto;
     }
 
 
@@ -76,8 +79,9 @@ public class VehicleServiceImpl implements VehicleService{
 
 
     @Override
-    public VehicleResponseDto findByIdVehicle(VehicleRequestDto vehicleRequestDto) {
-        return null;
+    public VehicleResponseDto findByIdVehicle(UUID id) {
+      Vehicle vehicle  =  vehicleDao.getReferenceById(id);
+      return vehicleMapper.toVehicleResponseDto(vehicle);
     }
 
 
@@ -123,12 +127,17 @@ public class VehicleServiceImpl implements VehicleService{
        return listeBoite;
     }
 
-
-
     @Override
-    public VehicleResponseDto deleteByIdVehicle(VehicleRequestDto vehicleRequestDto) {
-        return null;
+    public VehicleResponseDto deleteByIdVehicle(UUID id) {
+          VehicleResponseDto vehicleResponseDto = findByIdVehicle(id);
+        if(vehicleResponseDto == null)
+            throw new VehicleException("error");
+        Vehicle vehicle = vehicleResponseDto.vehicle();
+        vehicleDao.delete(vehicle);
+        return vehicleResponseDto;
     }
+
+
 
 
     public void  verifCarDto(CarRequestDto carRequestDto){
@@ -178,6 +187,7 @@ public class VehicleServiceImpl implements VehicleService{
     }
 
 
+
     public void verifBikeDto(BikeRequestDto bikeRequestDto){
         if(bikeRequestDto == null ||
         bikeRequestDto.brand() == null || bikeRequestDto.brand().isBlank() ||
@@ -189,6 +199,8 @@ public class VehicleServiceImpl implements VehicleService{
         )
             throw new VehicleException("error");
     }
+
+
 
     public void verifUtilityVehicleDto(UtilityVehicleRequestDto utilityVehicleRequestDto){
         if(utilityVehicleRequestDto == null ||
@@ -205,6 +217,8 @@ public class VehicleServiceImpl implements VehicleService{
         )
             throw new VehicleException("error");
     }
+
+
 }
 
 

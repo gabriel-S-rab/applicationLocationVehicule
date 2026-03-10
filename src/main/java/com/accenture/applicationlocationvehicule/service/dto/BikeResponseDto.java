@@ -1,7 +1,9 @@
 package com.accenture.applicationlocationvehicule.service.dto;
 
+import java.util.UUID;
+
 public record BikeResponseDto(
-     int id,
+     UUID id,
      int framSize,
      String brand,
      String color,

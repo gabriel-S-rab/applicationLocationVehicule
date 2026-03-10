@@ -2,12 +2,14 @@ package com.accenture.applicationlocationvehicule.repository.entity;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 public class Administrator {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String lastName;
     private String firstName;
@@ -21,7 +23,7 @@ public class Administrator {
     public Administrator() {
     }
 
-    public Administrator(int id, String lastName, String firstName, String function, String email, String password) {
+    public Administrator(UUID id, String lastName, String firstName, String function, String email, String password) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -30,11 +32,11 @@ public class Administrator {
         this.password = password;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

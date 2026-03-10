@@ -1,11 +1,11 @@
 package com.accenture.applicationlocationvehicule.serviceTest.fake;
 
 import com.accenture.applicationlocationvehicule.repository.entity.Adress;
-import com.accenture.applicationlocationvehicule.service.dto.AdressRequestDto;
+
 
 import java.util.List;
 
-public record FakeClientRequestDto( int id,
+public record FakeClientRequestDto( Long id,
                                     String dateOfBirth,
                                     boolean desactivated,
                                     List<String> listOfLicenses,

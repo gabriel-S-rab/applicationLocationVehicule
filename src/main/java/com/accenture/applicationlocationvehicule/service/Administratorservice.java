@@ -4,6 +4,7 @@ import com.accenture.applicationlocationvehicule.service.dto.AdministratorReques
 import com.accenture.applicationlocationvehicule.service.dto.AdministratorResponseDto;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface Administratorservice {
 
@@ -13,5 +14,5 @@ AdministratorResponseDto findByIdAdministrator(AdministratorRequestDto administr
 
   List<AdministratorResponseDto> findAllAdministrator();
 
-AdministratorResponseDto deleteByIdAdministrator(int id);
+AdministratorResponseDto deleteByIdAdministrator(UUID id);
 }

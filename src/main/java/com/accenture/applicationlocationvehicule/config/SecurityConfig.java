@@ -42,8 +42,8 @@ public class SecurityConfig {
                         .requestMatchers("/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html").permitAll()
-                        .requestMatchers(HttpMethod.POST, pathPostAdministrator).hasRole(admin)
-                        .requestMatchers(HttpMethod.DELETE, pathDeleteAdministrator).hasRole(admin)
+                        .requestMatchers(HttpMethod.POST, pathPostAdministrator).permitAll()     //hasRole(admin)
+                        .requestMatchers(HttpMethod.DELETE, pathDeleteAdministrator).permitAll()             //hasRole(admin)
 
                         .requestMatchers(HttpMethod.GET, pathGetCar).hasRole(admin)
                         .requestMatchers(HttpMethod.GET,pathGetCarId).hasRole(admin)
@@ -56,6 +56,8 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.PUT, pathPutVehicles).hasRole(admin)
                         .requestMatchers(HttpMethod.GET, pathGetVehicle).hasRole(admin)
+                        .requestMatchers(HttpMethod.GET, "/vehicles/vehicle").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/vehicles").permitAll()
 
                         .requestMatchers(HttpMethod.PUT, pathPutClient).permitAll()
                         .requestMatchers(HttpMethod.DELETE, pathDeleteClients).hasRole(admin)

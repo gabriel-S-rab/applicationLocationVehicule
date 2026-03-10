@@ -2,6 +2,7 @@ package com.accenture.applicationlocationvehicule.service.mapper;
 
 import com.accenture.applicationlocationvehicule.repository.entity.Bike;
 import com.accenture.applicationlocationvehicule.repository.entity.Vehicle;
+import com.accenture.applicationlocationvehicule.service.VehicleService;
 import com.accenture.applicationlocationvehicule.service.dto.*;
 import org.mapstruct.Mapper;
 
@@ -14,13 +15,6 @@ public interface VehicleMapper {
 
     List<VehicleResponseDto> toListVehicleResponseDto(List<Vehicle> listVehicle);
 
-    CarResponseDto toCarResponseDto(Vehicle vehicle); // test
+    VehicleResponseDto toVehicleResponseDto(Vehicle vehicle);
 
-    BikeResponseDto toBikeResponseDto(Vehicle  vehicle); //
-
-    UtilityVehicleResponseDto  toUtilityVehicleResponseDto(Vehicle vehicle);
-
-    MotorcycleResponseDto toMotorcycleResponseDto(Vehicle vehicle); // test
-
-    MotorHomeResponseDto toMotorhomeResponseDto(Vehicle vehicle);
 }

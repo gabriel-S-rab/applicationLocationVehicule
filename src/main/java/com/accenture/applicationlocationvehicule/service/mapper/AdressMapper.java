@@ -15,6 +15,8 @@ public interface AdressMapper {
 
     Adress toAdress(AdressResponseDto adressResponseDto);
 
+    AdressRequestDto toAdressRequestDto(Adress adress);
+
 
 }
 

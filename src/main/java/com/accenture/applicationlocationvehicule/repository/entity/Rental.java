@@ -1,16 +1,16 @@
 package com.accenture.applicationlocationvehicule.repository.entity;
 
 import jakarta.persistence.*;
-import org.springframework.objenesis.instantiator.util.UnsafeUtils;
 
 import java.util.UUID;
+
 
 @Entity
 public class Rental {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     private int numberOfKilometersTraveled;
     private int totalAmount;
     private String validationDate;
@@ -27,7 +27,7 @@ public class Rental {
     private String startDate;
     private String endDate;
 
-    public Rental(int id, int numberOfKilometersTraveled, int totalAmount, String validationDate, String rentalStatus, Client client , Vehicle vehicule /* , Accessory accessory */, String startDate, String endDate) {
+    public Rental(UUID id, int numberOfKilometersTraveled, int totalAmount, String validationDate, String rentalStatus, Client client , Vehicle vehicule /* , Accessory accessory */, String startDate, String endDate) {
         this.id = id;
         this.numberOfKilometersTraveled = numberOfKilometersTraveled;
         this.totalAmount = totalAmount;
@@ -40,11 +40,11 @@ public class Rental {
         this.endDate = endDate;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -87,22 +87,6 @@ public class Rental {
     public void setClient(Client client) {
         this.client = client;
     }
-
-//    public Vehicle getVehicule() {
-//        return vehicule;
-//    }
-//
-//    public void setVehicule(Vehicle vehicule) {
-//        this.vehicule = vehicule;
-//    }
-
-//    public Accessory getAccessory() {
-//        return accessory;
-//    }
-//
-//    public void setAccessory(Accessory accessory) {
-//        this.accessory = accessory;
-//    }
 
     public String getStartDate() {
         return startDate;

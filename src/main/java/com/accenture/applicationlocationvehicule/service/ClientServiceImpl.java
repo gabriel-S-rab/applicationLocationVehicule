@@ -54,7 +54,7 @@ public class ClientServiceImpl implements ClientService{
        SimpleDateFormat dateForma = new SimpleDateFormat("EEE dd MMM yyyy HH:mm:ss");
       String stringDateFormat = dateForma.format(dateToday);
        client.setRegistrationDate(stringDateFormat);
-       client.setDesactivated("false");
+       client.setDesactivated(false);
        client.setPassword(passwordEncoder.encode(clientRequestDto.password()));
         Client saved  =  clientDao.save(client);
       if(saved == null)

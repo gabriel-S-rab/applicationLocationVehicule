@@ -4,16 +4,17 @@ import jakarta.persistence.*;
 
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Entity
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     private String dateOfBirth;
-    private String desactivated;
+    private boolean desactivated;
 
     @ElementCollection
     @JoinTable(name = "client_list_of_licenses")
@@ -35,7 +36,7 @@ public class Client {
     public Client() {
     }
 
-    public Client(String dateOfBirth, String desactivated, List<String> listOfLicenses, String registrationDate, String password, String email, Adress adress, String firstName, String lastName) {
+    public Client(String dateOfBirth, boolean desactivated, List<String> listOfLicenses, String registrationDate, String password, String email, Adress adress, String firstName, String lastName) {
         this.dateOfBirth = dateOfBirth;
         this.desactivated = desactivated;
         this.listOfLicenses = listOfLicenses;
@@ -49,11 +50,11 @@ public class Client {
 
 
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -65,11 +66,11 @@ public class Client {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getDesactivated() {
+    public boolean getDesactivated() {
         return desactivated;
     }
 
-    public void setDesactivated(String desactivated) {
+    public void setDesactivated(boolean desactivated) {
         this.desactivated = desactivated;
     }
 

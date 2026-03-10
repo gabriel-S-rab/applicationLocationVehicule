@@ -1,21 +1,12 @@
 package com.accenture.applicationlocationvehicule.repository.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-
-import java.util.UUID;
 
 
 @Entity
 public class Bike extends  Vehicle{
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private int id;
+
     private int framSize;
     private String brand;
     private String color;

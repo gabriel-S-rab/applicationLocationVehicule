@@ -7,9 +7,8 @@ import com.accenture.applicationlocationvehicule.repository.entity.Client;
 import com.accenture.applicationlocationvehicule.service.ClientService;
 import com.accenture.applicationlocationvehicule.service.dto.ClientRequestDto;
 import com.accenture.applicationlocationvehicule.service.dto.ClientResponseDto;
-import com.accenture.applicationlocationvehicule.service.mapper.AdressMapper;
-import com.accenture.applicationlocationvehicule.service.mapper.ClientMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,46 +23,44 @@ import java.util.Optional;
 public class FakeClientServiceImpl implements ClientService {
 
 
-    private final AdressMapper adressMapper;
-    private final ClientMapper clientMapper;
-    private final FakeClientDao fakeClientDao;
-    private final PasswordEncoder passwordEncoder;
+    private final FakeClientMapper fakeClientMapper = new FakeClientMapper();
+    private final FakeClientDao fakeClientDao = new FakeClientDao();
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-
-    public FakeClientServiceImpl(AdressMapper adressMapper, ClientMapper clientMapper, FakeClientDao clientDao, PasswordEncoder passwordEncoder) {
-        this.adressMapper = adressMapper;
-        this.clientMapper = clientMapper;
-        this.fakeClientDao = clientDao;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     public FakeClientServiceImpl() {
 
     }
 
 
-    @Override
+
     @Transactional
-    public ClientResponseDto addClient(ClientRequestDto clientRequestDto){
-        if(clientRequestDto.dateOfBirth() == null || clientRequestDto.dateOfBirth().isBlank()
-                || clientRequestDto.adress() == null
-                || clientRequestDto.email() == null || clientRequestDto.email().isBlank()
-                || clientRequestDto.password()== null || clientRequestDto.password().isBlank()
-                || clientRequestDto.firstName() == null || clientRequestDto.firstName().isBlank()
-                || clientRequestDto.lastName() == null || clientRequestDto.lastName().isBlank())
+    public ClientResponseDto addClient(FakeClientRequestDto fakeClientRequestDto){
+        if(fakeClientRequestDto.dateOfBirth() == null || fakeClientRequestDto.dateOfBirth().isBlank()
+                || fakeClientRequestDto.adress() == null
+                || fakeClientRequestDto.email() == null || fakeClientRequestDto.email().isBlank()
+                || fakeClientRequestDto.password()== null || fakeClientRequestDto.password().isBlank()
+                || fakeClientRequestDto.firstName() == null || fakeClientRequestDto.firstName().isBlank()
+                || fakeClientRequestDto.lastName() == null || fakeClientRequestDto.lastName().isBlank())
             throw new ClientException("erreur lors de l'ajout du client"+HttpStatus.BAD_REQUEST);
-        Client client = clientMapper.toClient(clientRequestDto);
+        Client client = fakeClientMapper.toClient(fakeClientRequestDto);
         Date dateToday = new Date();
         SimpleDateFormat dateForma = new SimpleDateFormat("EEE dd MMM yyyy HH:mm:ss");
         String stringDateFormat = dateForma.format(dateToday);
-        client.setRegistrationDate(stringDateFormat);
-        client.setDesactivated("false");
-        client.setPassword(passwordEncoder.encode(clientRequestDto.password()));
+        client.setRegistrationDate(stringDateFormat);   // pb
+        client.setDesactivated(false);
+        client.setPassword(passwordEncoder.encode(fakeClientRequestDto.password()));
         Client saved  =  fakeClientDao.save(client);
         if(saved == null)
             throw new ClientException("erreur lors de l'ajout du client"+HttpStatus.BAD_REQUEST);
-        ClientResponseDto clientResponseDto = clientMapper.toClientResponseDto(client);
+        ClientResponseDto clientResponseDto = fakeClientMapper.toClientResponseDto(client);
         return clientResponseDto;
+    }
+
+
+    @Override
+    public ClientResponseDto addClient(ClientRequestDto clientRequestDto) {
+        return null;
     }
 
 
@@ -71,18 +68,13 @@ public class FakeClientServiceImpl implements ClientService {
     @Override
     public ClientResponseDto findByClient(String email, String password){  // gerer retour password (dto spécifique / gestion controller ?)
         Optional<Client> optClient =  fakeClientDao.findByEmail(email);
-        if(optClient.isPresent()  /*optClient.get().getPassword().equals(password)*/){
+        if(optClient.isPresent()){
             Client client = optClient.get();
             if(passwordEncoder.matches(password, client.getPassword())) {
-                // client.setPassword("**********");
-                //    client.setDesactivated(null);
-                ClientResponseDto clientResponseDto = clientMapper.toClientResponseDto(client);
-                return clientResponseDto;
+                return fakeClientMapper.toClientResponseDto(client);
             }
-        } else if(optClient.isEmpty() || !optClient.get().getPassword().equals(password)){
-            throw new ClientException("erreur lors de la recuperation des informations du client"+HttpStatus.BAD_REQUEST);
         }
-        return null;
+            throw new ClientException("error");
     }
 
 
@@ -98,7 +90,7 @@ public class FakeClientServiceImpl implements ClientService {
     @Transactional
     public ClientResponseDto deleteByClient(String email , String password){
         ClientResponseDto clientResponseDto = findByClient(email,password);
-        Client client = clientMapper.toClient(clientResponseDto);
+        Client client = fakeClientMapper.toClient(clientResponseDto);
         if(client != null) {
             fakeClientDao.delete(client);
             return clientResponseDto;
@@ -112,8 +104,8 @@ public class FakeClientServiceImpl implements ClientService {
     public ClientResponseDto updateClient(String email , String password , ClientRequestDto clientRequestDto) {
         ClientResponseDto clientResponseDto = findByClient(email, password);
         if (passwordEncoder.matches(password,clientResponseDto.password())) {
-            Client newInfoClient = clientMapper.toClient(clientRequestDto);
-            Client clientExist = clientMapper.toClient(clientResponseDto);
+            Client newInfoClient = fakeClientMapper.toClient(clientRequestDto);
+            Client clientExist = fakeClientMapper.toClient(clientResponseDto);
             if (!clientExist.getPassword().equals(clientResponseDto.password()) && clientRequestDto.password() != null && !clientRequestDto.password().equals("string") && !clientRequestDto.password().isBlank())
                 clientExist.setPassword(clientResponseDto.password());
             if (!clientExist.getAdress().getCity().equals(newInfoClient.getAdress().getCity()) && clientRequestDto.adress().city() != null && !clientRequestDto.adress().city().equals("string") && !clientRequestDto.adress().city().isBlank()) {
@@ -141,7 +133,7 @@ public class FakeClientServiceImpl implements ClientService {
             if (!clientExist.getListOfLicenses().equals(clientRequestDto.listOfLicenses()))
                 clientExist.setListOfLicenses(clientRequestDto.listOfLicenses());
             Client saved = fakeClientDao.saveAndFlush(clientExist);
-            ClientResponseDto clientResponseDto1 = clientMapper.toClientResponseDto(saved);
+            ClientResponseDto clientResponseDto1 = fakeClientMapper.toClientResponseDto(saved);
             if (saved == null)
                 throw new ClientException("erruer lors de la modification du client");
             else

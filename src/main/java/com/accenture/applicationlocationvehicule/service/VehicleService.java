@@ -6,16 +6,17 @@ import com.accenture.applicationlocationvehicule.service.dto.VehicleRequestDto;
 import com.accenture.applicationlocationvehicule.service.dto.VehicleResponseDto;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface VehicleService {
 
     VehicleResponseDto addVehicle(VehicleRequestDto vehicleRequestDto);
 
-    VehicleResponseDto findByIdVehicle(VehicleRequestDto vehicleRequestDto);
+    VehicleResponseDto findByIdVehicle(UUID id);
 
     List<BoiteGenericDto> findAll();
 
-    VehicleResponseDto deleteByIdVehicle(VehicleRequestDto vehicleRequestDto);
+    VehicleResponseDto deleteByIdVehicle(UUID id);
 
 
 }
