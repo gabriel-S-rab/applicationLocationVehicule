@@ -63,12 +63,14 @@ public class AdministratorServiceImpl implements Administratorservice {
 
 
     @Override
+    @Transactional
     public AdministratorResponseDto deleteByIdAdministrator(UUID id){
         List<AdministratorResponseDto>  listAdministratorResponseDto = findAllAdministrator();
         if(listAdministratorResponseDto.size() > 1) {
             try {
 
                 Administrator administratorExist = administratorDao.getReferenceById(id);
+                administratorExist.getId();
                 administratorDao.delete(administratorExist);
                 return administratorMapper.toAdministratorResponseDto(administratorExist);
             } catch (EntityNotFoundException e) {

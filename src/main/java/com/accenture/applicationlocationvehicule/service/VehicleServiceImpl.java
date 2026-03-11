@@ -6,6 +6,7 @@ import com.accenture.applicationlocationvehicule.repository.VehicleDao;
 import com.accenture.applicationlocationvehicule.repository.entity.*;
 import com.accenture.applicationlocationvehicule.service.dto.*;
 import com.accenture.applicationlocationvehicule.service.mapper.*;
+import org.hibernate.Hibernate;
 import org.springframework.boot.web.server.Http2;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -76,13 +77,48 @@ public class VehicleServiceImpl implements VehicleService{
         return null;
     }
 
-
-
     @Override
-    public VehicleResponseDto findByIdVehicle(UUID id) {
-      Vehicle vehicle  =  vehicleDao.getReferenceById(id);
-      return vehicleMapper.toVehicleResponseDto(vehicle);
+    public BoiteGenericDto findByIdVehicle(UUID id) {
+
+
+        Vehicle vehicle = vehicleDao.findById(id)
+                .orElseThrow(() -> new VehicleException("Véhicule introuvable"));
+
+
+        BoiteGenericDto boiteGenericDto = new BoiteGenericDto<>();
+
+        switch(vehicle.getName()) {
+            case "bike" -> {
+                Bike bike = (Bike) vehicle;
+                BikeResponseDto bikeResponseDto = bikeMapper.toBikeResponseDto(bike);
+                boiteGenericDto.setBoite(bikeResponseDto);
+            }
+            case "motorcycle" -> {
+                Motorcycle motorcycle = (Motorcycle) vehicle;
+                MotorcycleResponseDto motorcycleResponseDto = motorcycleMapper.toMotorcycleResponseDto(motorcycle);
+                boiteGenericDto.setBoite(motorcycleResponseDto);
+            }
+            case "motorhome" -> {
+                Motorhome motorhome = (Motorhome) vehicle;
+                MotorHomeResponseDto motorHomeResponseDto = motorhomeMapper.toMotorhomeResponseDto(motorhome);
+                boiteGenericDto.setBoite(motorHomeResponseDto);
+            }
+            case "utilityVehicle" -> {
+                UtilityVehicle utilityVehicle = (UtilityVehicle) vehicle;
+                UtilityVehicleResponseDto utilityVehicleResponseDto = utilityVehicleMapper.toUtilityVehicleResponseDto(utilityVehicle);
+                boiteGenericDto.setBoite(utilityVehicleResponseDto);
+            }
+            case "car" -> {
+                Car car = (Car) vehicle;
+                CarResponseDto carResponseDto = carMapper.toCarResponseDto(car);
+                boiteGenericDto.setBoite(carResponseDto); // correction si manquait
+            }
+        }
+
+        return boiteGenericDto;
     }
+
+
 
 
 
@@ -129,14 +165,11 @@ public class VehicleServiceImpl implements VehicleService{
 
     @Override
     public VehicleResponseDto deleteByIdVehicle(UUID id) {
-          VehicleResponseDto vehicleResponseDto = findByIdVehicle(id);
-        if(vehicleResponseDto == null)
-            throw new VehicleException("error");
-        Vehicle vehicle = vehicleResponseDto.vehicle();
+        Vehicle vehicle = vehicleDao.findById(id)
+                .orElseThrow(() -> new VehicleException("Véhicule introuvable"));
         vehicleDao.delete(vehicle);
-        return vehicleResponseDto;
+        return vehicleMapper.toVehicleResponseDto(vehicle);
     }
-
 
 
 

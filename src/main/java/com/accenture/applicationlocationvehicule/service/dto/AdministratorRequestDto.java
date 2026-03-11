@@ -1,8 +1,8 @@
 package com.accenture.applicationlocationvehicule.service.dto;
 
-import java.util.UUID;
 
-public record AdministratorRequestDto (UUID id,
+
+public record AdministratorRequestDto (
                                        String lastName,
                                        String firstName,
                                        String function,

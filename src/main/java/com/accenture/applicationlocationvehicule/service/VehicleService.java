@@ -12,11 +12,11 @@ public interface VehicleService {
 
     VehicleResponseDto addVehicle(VehicleRequestDto vehicleRequestDto);
 
-    VehicleResponseDto findByIdVehicle(UUID id);
+ //   VehicleResponseDto findByIdVehicle(UUID id);
 
     List<BoiteGenericDto> findAll();
 
     VehicleResponseDto deleteByIdVehicle(UUID id);
 
-
+    BoiteGenericDto findByIdVehicle(UUID id);
 }

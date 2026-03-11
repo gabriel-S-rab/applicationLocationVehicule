@@ -34,6 +34,7 @@ public class BikeServiceImpl implements  BikeService{
     @Override
     public BikeResponseDto findByIdBike(UUID id) {
         Bike bike = bikeDao.getReferenceById(id);
+        bike.getId();
         return bikeMapper.toBikeResponseDto(bike);
     }
 

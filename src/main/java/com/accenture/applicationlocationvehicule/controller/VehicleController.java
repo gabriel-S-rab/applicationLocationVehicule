@@ -1,10 +1,12 @@
 package com.accenture.applicationlocationvehicule.controller;
 
 
+import com.accenture.applicationlocationvehicule.repository.entity.Vehicle;
 import com.accenture.applicationlocationvehicule.service.VehicleService;
 import com.accenture.applicationlocationvehicule.service.dto.BoiteGenericDto;
 import com.accenture.applicationlocationvehicule.service.dto.VehicleRequestDto;
 import com.accenture.applicationlocationvehicule.service.dto.VehicleResponseDto;
+import com.accenture.applicationlocationvehicule.service.mapper.VehicleMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +21,12 @@ public class VehicleController {
 
 
     private final VehicleService vehicleService;
+    private final VehicleMapper vehicleMapper;
 
 
-    public VehicleController(VehicleService vehicleService) {
+    public VehicleController(VehicleService vehicleService, VehicleMapper vehicleMapper) {
         this.vehicleService = vehicleService;
+        this.vehicleMapper = vehicleMapper;
     }
 
 
@@ -45,8 +49,10 @@ public class VehicleController {
 
     @Operation(summary = "Récupération d'un véhicule" , description = "Récupération d'un véhicule par son id")
     @GetMapping
-    public ResponseEntity<VehicleResponseDto> findById(UUID id){
-        VehicleResponseDto vehicleResponseDto = vehicleService.findByIdVehicle(id);
+    public ResponseEntity<VehicleResponseDto> findById(@RequestHeader UUID id){
+        BoiteGenericDto boiteGenericDto = vehicleService.findByIdVehicle(id);
+        Vehicle vehicle = (Vehicle) boiteGenericDto.getBoite();
+        VehicleResponseDto vehicleResponseDto = vehicleMapper.toVehicleResponseDto(vehicle);
         return ResponseEntity.status(HttpStatus.OK).body(vehicleResponseDto);
     }
 
