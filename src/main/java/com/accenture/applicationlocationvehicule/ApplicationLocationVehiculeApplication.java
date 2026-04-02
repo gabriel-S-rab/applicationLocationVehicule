@@ -1,7 +1,10 @@
 package com.accenture.applicationlocationvehicule;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+
 
 @SpringBootApplication
 public class ApplicationLocationVehiculeApplication {
@@ -11,3 +14,5 @@ public class ApplicationLocationVehiculeApplication {
     }
 
 }
+
+
